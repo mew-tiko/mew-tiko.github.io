@@ -201,7 +201,7 @@
   .paper {
     background-color: var(--surface);
     background-image: repeating-linear-gradient(to bottom, transparent 0 33px, var(--ruled-line) 33px 34px);
-    background-position: 0 14px;
+    background-position: 0 20px;
     border: 1px solid var(--rule);
     border-left: 4px double var(--pink);
     border-radius: 2px 14px 14px 2px;
@@ -209,15 +209,22 @@
     line-height: 34px;
   }
   .paper p { line-height: 34px; }
-  .about-grid { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 28px; align-items: start; }
+  .about-grid { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } .poster { max-width: 360px; } }
+  .about-grid-2 { display: grid; grid-template-columns: minmax(0, 600px) 1fr; gap: 20px; align-items: start; }
   @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } .poster { max-width: 360px; } }
   .poster { margin: 0; transform: rotate(-1.5deg); }
   .poster img {
     display: block; width: 100%; height: auto; border-radius: 6px;
     border: 6px solid #fff; box-shadow: 6px 6px 0 var(--board);
   }
-  .poster-2 { margin: 0; transform: rotate(-1.5deg); }
+  .poster-2 { margin: 0; transform: rotate(1.5deg); }
   .poster-2 img {
+    display: block; width: 100%; height: auto; border-radius: 6px;
+    border: 6px solid #fff; box-shadow: 6px 6px 0 var(--board);
+  }
+  .poster-3 { margin: 0; transform: rotate(-1.5deg); }
+  .poster-3 img {
     display: block; width: 100%; height: auto; border-radius: 6px;
     border: 6px solid #fff; box-shadow: 6px 6px 0 var(--board);
   }
@@ -242,7 +249,7 @@
     background: var(--pink); color: #fff; box-shadow: 3px 3px 0 var(--navy);
   }
   .shop-btn.alt { background: var(--lime); color: var(--navy); }
-  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 0 22px; margin: 0; }
+  .facts { display: grid; grid-template-columns: max-content 1fr; gap: 0 30px; margin: 0; }
   .facts dt { color: var(--ink-soft); }
   .facts dd { margin: 0; }
   .facts .th { font-family: var(--thai); }
@@ -815,6 +822,20 @@
       <figcaption><span lang="ko">공식 포스터 © GMMTV</span><span lang="en">Official poster © GMMTV</span></figcaption>
     </figure>
     <div>
+   <div class="about-grid">
+   <figure class="poster-2">
+      <img src="poster-2.jpg" width="900" height="1125" alt="Oxytoxin official poster-2: five students in school uniforms and sunglasses in a classroom, with the title in glittering pink">
+    </figure>
+    <div>
+   <div class="about-grid">
+   <figure class="poster-3">
+      <img src="poster-3.jpg" width="900" height="1125" alt="Oxytoxin official poster-3: five students in school uniforms and sunglasses in a classroom, with the title in glittering pink">
+    </figure>
+    <div>
+    <div>
+    <div>
+  </section>
+   <div class="about-grid-2">
     <div class="paper">
       <dl class="facts">
         <dt><span lang="ko">원제</span><span lang="en">Original title</span></dt>
@@ -841,11 +862,6 @@ And so begins a glamorous makeover mission, as they each discover a self that is
     </p>
     </div> 
     </div>
-   <div class="about-grid">
-   <figure class="poster-2">
-      <img src="poster-2.jpg" width="900" height="1125" alt="Oxytoxin official poster-2: five students in school uniforms and sunglasses in a classroom, with the title in glittering pink">
-    </figure>
-    <div>
     <a class="pilot trailer" href="https://youtu.be/whry_7Bh1a8" target="_blank" rel="noopener">
       <div class="thumb">
         <img src="https://i.ytimg.com/vi/whry_7Bh1a8/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
