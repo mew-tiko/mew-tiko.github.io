@@ -785,6 +785,20 @@
   .hbd-tap { margin: 10px auto 0; font-size: 12.5px; color: var(--ink-soft); }
   @keyframes hbd-pop { from { opacity: 0; transform: scale(.5) rotate(-6deg); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .hbd, .hbd-card { animation: none; } }
+  /* ===== 달력 일정 종류별 색 ===== */
+  .cal-ev.extra.sched { background: var(--lime); color: var(--ink); }
+  .cal-ev.extra.apply { background: #DDF1FB; color: #1A5E82; box-shadow: inset 0 0 0 1.5px #2B8BB8; }
+  .cal-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 14px; font-size: 13px; color: var(--ink-soft); }
+  .cal-legend .k {
+    display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+    min-width: 22px; height: 18px; padding: 0 5px; border-radius: 5px; line-height: 1;
+    font-size: 10.5px; font-weight: 800; margin-left: 8px;
+  }
+  .cal-legend .k:first-child { margin-left: 0; }
+  .cal-legend .k.ep { background: var(--pink); color: #fff; }
+  .cal-legend .k.sched { background: var(--lime); }
+  .cal-legend .k.apply { background: #DDF1FB; box-shadow: inset 0 0 0 1.5px #2B8BB8; }
+  .cal-legend .k.bday { background: #fff; box-shadow: inset 0 0 0 1.5px var(--pink); }
 </style>
 </head>
 <body>
@@ -1329,6 +1343,51 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       <p class="notice-src">Source: GMMTV official notice (Thai) · Unofficial fan translation. Please check the original and X: GMMTV for exact details.</p>
     </div>
   </template>
+  <template id="notice-press">
+    <h3>Oxytoxin PRESS TOUR</h3>
+    <div class="notice-imgs">
+      <img src="notice/press-1.jpg" alt="Oxytoxin 프레스 투어 공식 포스터">
+    </div>
+
+    <div lang="ko">
+      <h4>10월 24일(토)</h4>
+      <table>
+        <tr><th>태국 시간</th><th>한국 시간</th><th>일정</th></tr>
+        <tr><td>11:30</td><td>13:30</td><td>วันบันเทิง 인터뷰</td></tr>
+        <tr><td>13:30</td><td>15:30</td><td>คิมที่ชอบรีแอคซีรีส์วาย 인터뷰</td></tr>
+        <tr><td>15:00</td><td>17:00</td><td>เม้นท์ก่อนเข้านอน 인터뷰</td></tr>
+        <tr><td>17:00</td><td>19:00</td><td><b>GMMTV LIVE</b> · #OxytoxinSeriesLIVE</td></tr>
+      </table>
+      <h4>10월 25일(일)</h4>
+      <table>
+        <tr><th>태국 시간</th><th>한국 시간</th><th>일정</th></tr>
+        <tr><td>10:30</td><td>12:30</td><td>Yriety 인터뷰</td></tr>
+        <tr><td>12:00</td><td>14:00</td><td>Maya TV 인터뷰</td></tr>
+        <tr><td>14:00</td><td>16:00</td><td>Praew Magazine 인터뷰</td></tr>
+      </table>
+
+      <p class="notice-src">원문: GMMTV 공식 포스터 · 시간은 태국 시간 기준임</p>
+    </div>
+
+    <div lang="en">
+      <h4>Saturday, October 24</h4>
+      <table>
+        <tr><th>Thailand</th><th>Korea (KST)</th><th>Schedule</th></tr>
+        <tr><td>11:30</td><td>13:30</td><td>วันบันเทิง interview</td></tr>
+        <tr><td>13:30</td><td>15:30</td><td>คิมที่ชอบรีแอคซีรีส์วาย interview</td></tr>
+        <tr><td>15:00</td><td>17:00</td><td>เม้นท์ก่อนเข้านอน interview</td></tr>
+        <tr><td>17:00</td><td>19:00</td><td><b>GMMTV LIVE</b> · #OxytoxinSeriesLIVE</td></tr>
+      </table>
+      <h4>Sunday, October 25</h4>
+      <table>
+        <tr><th>Thailand</th><th>Korea (KST)</th><th>Schedule</th></tr>
+        <tr><td>10:30</td><td>12:30</td><td>Yriety interview</td></tr>
+        <tr><td>12:00</td><td>14:00</td><td>Maya TV interview</td></tr>
+        <tr><td>14:00</td><td>16:00</td><td>Praew Magazine interview</td></tr>
+      </table>
+      <p class="notice-src">Source: GMMTV official poster · Times are Thailand time;</p>
+    </div>
+  </template>
 </main>
 
 <footer>
@@ -1687,9 +1746,11 @@ And so begins a glamorous makeover mission, as they each discover a self that is
     timeTH: '21:30', timeKR: '23:30',
     from: '2026-10', to: '2027-01',   /* 달력에 보여줄 달 */
     extra: [                  /* 기타 일정: ['날짜', '한국어', 'English', '공지 이름(없으면 생략)'] */
-      ['2026-10-26', '팬이벤트 응모 시작', 'Event sign-up opens', 'ltmy'],
-      ['2026-10-27', '응모 마감', 'Sign-up closes', 'ltmy'],
-      ['2026-10-29', '당첨 발표', 'Results', 'ltmy'],
+      ['2026-10-24', '프레스 투어 · LIVE', 'Press tour · LIVE', 'press'],
+      ['2026-10-25', '프레스 투어', 'Press tour', 'press'],
+      ['2026-10-26', '팬이벤트 응모 시작', 'Event sign-up opens', 'ltmy', 'apply'],
+      ['2026-10-27', '응모 마감', 'Sign-up closes', 'ltmy', 'apply'],
+      ['2026-10-29', '당첨 발표', 'Results', 'ltmy', 'apply'],
       ['2026-11-07', 'Love to Meet You', 'Love to Meet You', 'ltmy']
     ]
   };
@@ -1707,7 +1768,7 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       if (SCHEDULE.skip.indexOf(k) === -1) { eps.push({ date: k, ep: n }); (events[k] = events[k] || []).push({ ep: n }); n++; }
       d.setDate(d.getDate() + 7);
     }
-    SCHEDULE.extra.forEach(function (x) { (events[x[0]] = events[x[0]] || []).push({ ko: x[1], en: x[2], notice: x[3] }); });
+    SCHEDULE.extra.forEach(function (x) { (events[x[0]] = events[x[0]] || []).push({ ko: x[1], en: x[2], notice: x[3], type: x[4] || 'sched' }); });
     /* 출연자 생일 (프로필의 birth에서 자동으로) */
     if (typeof PROFILES !== 'undefined') {
       var y0 = parse(SCHEDULE.from).getFullYear(), y1 = parse(SCHEDULE.to).getFullYear();
@@ -1766,10 +1827,10 @@ And so begins a glamorous makeover mission, as they each discover a self that is
             var label = both(e.ko, e.en);
             var label = both(e.ko, e.en);
             if (e.notice) {
-              html += '<button type="button" class="cal-ev extra" data-notice="' + e.notice + '">' + label + '</button>';
+              html += '<button type="button" class="cal-ev extra ' + e.type + '" data-notice="' + e.notice + '">' + label + '</button>';
               label = '<button type="button" data-notice="' + e.notice + '">' + label + '</button>';
             } else {
-              html += '<span class="cal-ev extra">' + label + '</span>';
+              html += '<span class="cal-ev extra ' + e.type + '">' + label + '</span>';
             }
             list += '<li><b>' + both((m + 1) + '.' + day, MON_EN[m].slice(0, 3) + ' ' + day) + '</b>' + label + '</li>';
           }
@@ -1778,6 +1839,7 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       }
       html += '</div>';
       if (list) html += '<ul class="cal-list">' + list + '</ul>';
+      html += '<div class="cal-legend"><span class="k ep">EP</span>' + both('본방송', 'Episode') + '<span class="k sched"></span>' + both('공식 일정', 'Official') + '<span class="k apply"></span>' + both('응모·발표', 'Sign-up & results') + '<span class="k bday">🎂</span>' + both('생일', 'Birthday') + '</div>';
       html += '<p class="cal-note">' + both('결방·시간 변경은 GMMTV 공식 공지를 확인해 주세요.', 'Check GMMTV official notices for schedule changes.') + '</p>';
       box.innerHTML = html;
       var p = box.querySelector('.p'), nx = box.querySelector('.n');
