@@ -661,6 +661,13 @@
   .book.closing .book-cover { animation: cover-close .6s ease-out both; }
   @keyframes cover-close { from { transform: rotateY(-165deg); opacity: 0; } to { transform: none; opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .book.closing .book-cover { animation: none; } }
+  /* ===== 트레일러 NEW 배지 ===== */
+  .badge-new {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .06em;
+    padding: 2px 8px; border-radius: 999px; background: var(--pink); color: #fff;
+    margin-right: 6px; vertical-align: 2px;
+  }
+  .pilot.trailer { box-shadow: 4px 4px 0 var(--lime), 0 0 0 2px var(--pink); }
 </style>
 </head>
 <body>
@@ -721,6 +728,16 @@
 
 And so begins a glamorous makeover mission, as they each discover a self that is twisted and restless… yet grows beautifully and begins to shine.</span>
     </p>
+    <a class="pilot trailer" href="https://x.com/GMMTV/status/2113133250185203949" target="_blank" rel="noopener">
+      <div class="thumb">
+        <img src="poster.jpg" alt="" loading="lazy" style="object-position: center 35%;">
+        <span class="play" aria-hidden="true"></span>
+      </div>
+      <div>
+        <strong><span class="badge-new">NEW</span><span lang="ko">공식 트레일러 공개!</span><span lang="en">Official trailer is out!</span></strong>
+        <span class="sub"><span lang="ko">GMMTV 공식 X · 2026. 10. 22.</span><span lang="en">GMMTV official X · Oct 22, 2026</span></span>
+      </div>
+    </a>
     <a class="pilot" href="https://www.youtube.com/watch?v=QNvnpjbNrRg" target="_blank" rel="noopener">
       <div class="thumb">
         <img src="https://i.ytimg.com/vi/QNvnpjbNrRg/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
@@ -812,6 +829,19 @@ And so begins a glamorous makeover mission, as they each discover a self that is
     <ul class="vid-grid">
 
       <!-- 영상 1개 = <li>부터 </li>까지. 새 영상은 맨 위에 붙이면 최신순이 돼요 -->
+      <li>
+        <a class="vid" href="https://x.com/GMMTV/status/2113133250185203949" target="_blank" rel="noopener">
+          <div class="vid-thumb">
+            <img src="poster.jpg" alt="" loading="lazy" style="object-position: center 35%;">
+            <span class="play" aria-hidden="true"></span>
+          </div>
+          <div class="vid-body">
+            <span class="vid-tag"><span lang="ko">트레일러</span><span lang="en">Trailer</span></span>
+            <span class="vid-date">2026. 10. 22.</span>
+            <span class="vid-title"><span lang="ko">Oxytoxin 공식 트레일러</span><span lang="en">Oxytoxin Official Trailer</span></span>
+          </div>
+        </a>
+      </li>
       <li>
         <a class="vid" href="https://youtu.be/3jcxjqb9cVI" target="_blank" rel="noopener">
           <div class="vid-thumb">
