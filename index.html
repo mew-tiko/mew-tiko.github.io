@@ -668,6 +668,112 @@
     margin-right: 6px; vertical-align: 2px;
   }
   .pilot.trailer { box-shadow: 4px 4px 0 var(--lime), 0 0 0 2px var(--pink); }
+  /* ===== 방송 일정 + 달력 ===== */
+  .onair {
+    display: grid; grid-template-columns: auto 1fr; gap: 6px 22px; align-items: center;
+    background: var(--ink); color: var(--lavender); border-radius: 14px; padding: 20px 24px; margin-bottom: 26px;
+    box-shadow: 6px 6px 0 var(--pink);
+  }
+  .onair .dday { grid-row: span 2; font-size: clamp(34px, 6vw, 52px); font-weight: 800; color: var(--lime); line-height: 1; letter-spacing: -.02em; }
+  .onair strong { font-size: 18px; }
+  .onair .sub { font-size: 14.5px; color: rgba(240,236,247,.8); }
+  .cal {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 18px clamp(12px, 3vw, 24px) 22px;
+    box-shadow: 6px 6px 0 var(--board);
+  }
+  .cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .cal-head h3 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+  .cal-head button {
+    width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; font-size: 20px; line-height: 1;
+    background: var(--pink); color: #fff; box-shadow: 2px 2px 0 var(--ink);
+  }
+  .cal-head button:disabled { background: var(--rule); color: var(--ink-soft); box-shadow: none; cursor: default; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-dow { text-align: center; font-size: 12.5px; font-weight: 700; color: var(--ink-soft); padding: 4px 0; }
+  .cal-dow:first-child { color: var(--pink); }
+  .cal-dow:last-child, .cal-day.sat { background-color: rgba(43,139,184,.07); }
+  .cal-day {
+    position: relative; min-height: 64px; border-radius: 8px; padding: 6px; font-size: 13px; font-weight: 600;
+    border: 1px solid var(--ruled-line);
+  }
+  .cal-day.empty { border: 0; background: none; }
+  .cal-day.today { outline: 2px solid var(--lime); outline-offset: -2px; }
+  .cal-day.today::after { content: "TODAY"; position: absolute; right: 5px; top: 6px; font-size: 9px; font-weight: 800; color: var(--ink-soft); }
+  .cal-ev {
+    display: block; margin-top: 4px; font-size: 11.5px; font-weight: 800; line-height: 1.3;
+    padding: 3px 6px; border-radius: 6px; background: var(--pink); color: #fff; word-break: break-all;
+  }
+  .cal-ev.extra { background: var(--lime); color: var(--ink); }
+  .cal-list { list-style: none; margin: 18px 0 0; padding: 14px 0 0; border-top: 1px dashed var(--rule); font-size: 14.5px; }
+  .cal-list li { padding: 4px 0; }
+  .cal-list b { display: inline-block; min-width: 6.2em; color: var(--pink); }
+  .cal-note { font-size: 13px; color: var(--ink-soft); margin-top: 10px; }
+  @media (max-width: 560px) {
+    .cal-day { min-height: 48px; padding: 4px; font-size: 12px; }
+    .cal-ev { font-size: 10px; padding: 2px 4px; }
+    .onair { grid-template-columns: 1fr; }
+    .onair .dday { grid-row: auto; }
+  }
+  /* ===== 달력 일정 공지 팝업 ===== */
+  button.cal-ev { width: 100%; border: 0; text-align: left; cursor: pointer; font-family: inherit; }
+  button.cal-ev:hover { filter: brightness(.95); text-decoration: underline; }
+  .cal-list button {
+    border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--lime);
+  }
+  .notice {
+    border: 0; padding: 0; width: min(94vw, 720px); max-height: 90vh; overflow: auto;
+    background: var(--surface); color: var(--ink); border-radius: 14px; box-shadow: 0 24px 70px rgba(0,0,0,.35);
+  }
+  .notice::backdrop { background: rgba(26, 94, 130, .6); }
+  .notice[open] { animation: rise .35s ease both; }
+  .notice-close {
+    position: sticky; top: 10px; float: right; margin: 10px 10px 0 0; z-index: 2;
+    width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--pink); color: #fff; font-size: 20px; line-height: 1; cursor: pointer;
+  }
+  .notice-body { padding: 22px clamp(18px, 4vw, 32px) 28px; }
+  .notice-body h3 { font-size: 24px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 14px; }
+  .notice-body h4 { font-size: 16px; font-weight: 800; color: var(--pink); margin: 22px 0 8px; }
+  .notice-imgs { display: grid; gap: 10px; }
+  .notice-imgs img { width: 100%; height: auto; border-radius: 8px; display: block; }
+  .notice-body ul, .notice-body ol { margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.75; }
+  .notice-body li { margin-bottom: 4px; }
+  .notice-body table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .notice-body th, .notice-body td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--ruled-line); vertical-align: top; }
+  .notice-body th { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
+  .notice-src { font-size: 13px; color: var(--ink-soft); margin-top: 20px; padding-top: 12px; border-top: 1px dashed var(--rule); max-width: none; }
+  /* ===== 달력 생일 표시 ===== */
+  .cal-ev.bday { background: #fff; color: var(--pink); box-shadow: inset 0 0 0 1.5px var(--pink); }
+  .cal-day:has(.bday) { background-image: radial-gradient(circle at 85% 80%, rgba(255,79,176,.14) 0 16px, transparent 17px); }
+  /* ===== 생일 축하 (HBD + 폭죽) ===== */
+  .hbd {
+    position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px;
+    background: rgba(26, 94, 130, .55); backdrop-filter: blur(2px); cursor: pointer;
+    animation: dim-in .25s ease both;
+  }
+  .hbd canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .hbd-card {
+    position: relative; z-index: 1; text-align: center; color: var(--ink);
+    background: var(--lavender); border-radius: 20px; padding: 26px clamp(22px, 5vw, 46px) 24px;
+    box-shadow: 8px 8px 0 var(--pink), 0 30px 80px rgba(0,0,0,.35);
+    animation: hbd-pop .6s cubic-bezier(.2, 1.4, .4, 1) both;
+  }
+  .hbd-photo {
+    width: 112px; height: 112px; margin: -78px auto 6px; border-radius: 50%; overflow: hidden;
+    border: 5px solid #fff; background: var(--pink); box-shadow: 0 6px 18px rgba(36,49,95,.25);
+  }
+  .hbd-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hbd-title {
+    margin: 0; line-height: 1.15; font-size: clamp(56px, 12vw, 104px);
+    font-family: "Great Vibes", "Snell Roundhand", cursive; font-weight: 400;
+    background: linear-gradient(115deg, #E0207F 0%, #FF4FB0 40%, #F23597 70%, #D3147A 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    padding: 0 .1em;
+  }
+  .hbd-sub { margin: 4px auto 0; font-size: 16px; font-weight: 700; }
+  .hbd-tap { margin: 10px auto 0; font-size: 12.5px; color: var(--ink-soft); }
+  @keyframes hbd-pop { from { opacity: 0; transform: scale(.5) rotate(-6deg); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .hbd, .hbd-card { animation: none; } }
 </style>
 </head>
 <body>
@@ -676,6 +782,7 @@
   <a class="mark" href="#top">Oxytoxin</a>
   <nav aria-label="Sections">
     <a href="#about"><span lang="ko">작품 소개</span><span lang="en">About</span></a>
+    <a href="#schedule"><span lang="ko">방송 일정</span><span lang="en">Schedule</span></a>
     <a href="#cast"><span lang="ko">인물·배우</span><span lang="en">Cast</span></a>
     <a href="#videos"><span lang="ko">영상</span><span lang="en">Videos</span></a>
     <a href="#album"><span lang="ko">앨범</span><span lang="en">Album</span></a>
@@ -715,7 +822,7 @@
         <dt><span lang="ko">제작</span><span lang="en">Produced by</span></dt>
         <dd>GMMTV, Parbdee Taweesuk</dd>
         <dt><span lang="ko">방송</span><span lang="en">Network</span></dt>
-        <dd>GMM25</dd>
+        <dd><span lang="ko">GMM25 · 매주 토 21:30 (한국 23:30) · 넷플릭스 전 세계 동시 공개 · 2026년 11월 7일 첫 방송</span><span lang="en">GMM25 · Saturdays 21:30 (23:30 KST) · Worldwide on Netflix · Premieres Nov 7, 2026</span></dd>
         <dt><span lang="ko">공식 해시태그</span><span lang="en">Hashtag</span></dt>
         <dd>#OxytoxinSeries</dd>
       </dl>
@@ -728,14 +835,14 @@
 
 And so begins a glamorous makeover mission, as they each discover a self that is twisted and restless… yet grows beautifully and begins to shine.</span>
     </p>
-    <a class="pilot trailer" href="https://x.com/GMMTV/status/2113133250185203949" target="_blank" rel="noopener">
+    <a class="pilot trailer" href="https://youtu.be/whry_7Bh1a8" target="_blank" rel="noopener">
       <div class="thumb">
-        <img src="poster.jpg" alt="" loading="lazy" style="object-position: center 35%;">
+        <img src="https://i.ytimg.com/vi/whry_7Bh1a8/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
         <span class="play" aria-hidden="true"></span>
       </div>
       <div>
         <strong><span class="badge-new">NEW</span><span lang="ko">공식 트레일러 공개!</span><span lang="en">Official trailer is out!</span></strong>
-        <span class="sub"><span lang="ko">GMMTV 공식 X · 2026. 10. 22.</span><span lang="en">GMMTV official X · Oct 22, 2026</span></span>
+        <span class="sub"><span lang="ko">GMMTV 공식 유튜브 · 2026. 10. 22.</span><span lang="en">GMMTV official YouTube · Oct 22, 2026</span></span>
       </div>
     </a>
     <a class="pilot" href="https://www.youtube.com/watch?v=QNvnpjbNrRg" target="_blank" rel="noopener">
@@ -765,7 +872,12 @@ And so begins a glamorous makeover mission, as they each discover a self that is
     </div>
     </div>
   </section>
-
+  <section id="schedule">
+    <h2><span lang="ko">방송 일정</span><span lang="en">Schedule</span></h2>
+    <p class="note-hand"><span lang="ko">매주 토요일 · GMM25 / 넷플릭스 전 세계 동시 공개</span><span lang="en">Every Saturday · GMM25 / worldwide on Netflix</span></p>
+    <div class="onair" id="onair"></div>
+    <div class="cal" id="cal"></div>
+  </section>
   <section id="cast">
     <h2><span lang="ko">Toxxxxin 멤버</span><span lang="en">Meet Toxxxxin</span></h2>
     <p class="note-hand"><span lang="ko">캐릭터 이름 / 배우 이름 순서</span><span lang="en">Character first, actor below</span></p>
@@ -1080,6 +1192,91 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       </div>
     </div>
   </dialog>
+  <dialog class="notice" id="notice" aria-label="공지 / Notice">
+    <button type="button" class="notice-close" aria-label="닫기 / Close">×</button>
+    <div class="notice-body" id="notice-body"></div>
+  </dialog>
+
+  <!-- 공지 내용: 새 공지는 <template id="notice-이름">…</template>을 복사해서 만들어요 -->
+  <template id="notice-ltmy">
+    <h3>Oxytoxin : Love to Meet You</h3>
+    <div class="notice-imgs">
+      <img src="notice/ltmy-1.jpg" alt="Oxytoxin: Love to Meet You 공식 포스터">
+      <img src="notice/ltmy-2.jpg" alt="Oxytoxin: Love to Meet You 응모 조건 공지">
+    </div>
+
+    <div lang="ko">
+      <h4>행사 개요</h4>
+      <ul>
+        <li><b>일시</b> 2026년 11월 7일(토)</li>
+        <li><b>장소</b> 방콕 센트럴월드 SF World Cinema 8관</li>
+        <li><b>TOXXXXXIN INBOX</b> "모든 질문에는 답이 있다!" 궁금한 건 무엇이든 INBOX로 보내면 TOXXXXXIN이 전부 답해 줍니다.</li>
+        <li><b>스페셜</b> 배우들과 함께 시리즈 1화 같이 보기</li>
+        <li>입장권 판매 없음 · 당첨자는 무료 참가</li>
+      </ul>
+      <h4>응모 일정</h4>
+      <table>
+        <tr><th>일정</th><th>태국 시간</th><th>한국 시간</th></tr>
+        <tr><td>응모 시작 (GMMTV 공식 X에서만)</td><td>10/26(월) 12:00</td><td>10/26(월) 14:00</td></tr>
+        <tr><td>응모 마감 (254명이 차면 즉시 마감)</td><td>10/27(화) 12:00</td><td>10/27(화) 14:00</td></tr>
+        <tr><td>당첨 발표 (GMMTV 공식 SNS)</td><td>10/29(목)</td><td>10/29(목)</td></tr>
+        <tr><td>현장 본인 확인·좌석표 수령</td><td>11/7(토) 16:00–19:00</td><td>11/7(토) 18:00–21:00</td></tr>
+        <tr><td>대기 줄 시작</td><td>11/7(토) 18:30</td><td>11/7(토) 20:30</td></tr>
+      </table>
+      <h4>응모 조건</h4>
+      <ol>
+        <li>최대 254명. 응모한 순서대로 앞 254명에게 참가 자격을 제공, 1인 1회만 응모할 수 있고, 결과 발표 때 응모 순서에 따라 상영관 좌석 번호도 함께 정해집니다.</li>
+        <li>GMMTV 공식 X에 올라오는 링크의 구글 폼으로만 응모할 수 있습니다. 정보를 빠짐없이 입력하고 한 번만 응모하십시오.</li>
+        <li>정보를 빠짐없이, 조건에 맞게 입력한 1~254번째 응모자가 선정됩니다. 이름이나 이메일이 중복된 응모가 확인되면 자격이 취소됩니다.</li>
+        <li>10월 27일(화) 12:00에 마감하거나, 254명이 다 차면 바로 마감합니다. 예비 명단도 일부 받아서, 254명 안에 정보가 잘못됐거나 중복된 응모가 있으면 예비 순번대로 올라갑니다.</li>
+        <li>당첨자 명단은 10월 29일(목) GMMTV 공식 SNS에 발표됩니다. 좌석 번호는 응모 순서대로 정해집니다.</li>
+        <li>당첨자는 11월 7일(토) 16:00~19:00(태국 시간)에 행사장 앞에서, 응모한 이름과 같은 신분증 또는 여권을 보여 주고 본인 확인 후 좌석표를 받아야 합니다. 시간 안에 오지 않으면 자격이 취소됩니다.<br>※ 빈 좌석은 대기자에게 넘어갈 수 있고, 대기 줄은 18:30부터 섭니다.</li>
+      </ol>
+      <h4>유의사항</h4>
+      <ul>
+        <li>참가 자격을 상업적으로 이용할 수 없습니다. 대리 응모, 공식 외 거래(사고팔기), GMMTV 직원 사칭 같은 사기에 주의하십시오.</li>
+        <li>주최 측의 결정이 최종이며, 조건은 사전 공지 없이 바뀔 수 있습니다.</li>
+        <li>행사장에서는 홍보·방송용 촬영이 진행됩니다. 행사장에 오거나 근처를 지나가면 촬영될 수 있으니, 원하지 않으면 해당 시간에 그 구역을 피해 주십시오. 이 안내 이후 촬영에 담긴 경우 이름·얼굴·목소리·영상 등 개인정보를 현재와 앞으로의 모든 매체에서 홍보·방송·상업적 목적으로 쓰는 데 동의한 것으로 간주합니다.</li>
+      </ul>
+      <p class="notice-src">원문: GMMTV 공식 공지(태국어) · 비공식 팬 번역. 정확한 내용은 원문과 GMMTV 공식 X를 확인.</p>
+    </div>
+
+    <div lang="en">
+      <h4>About the event</h4>
+      <ul>
+        <li><b>Date</b> Saturday, November 7, 2026</li>
+        <li><b>Venue</b> Cinema 8, SF World Cinema, CentralWorld (Bangkok)</li>
+        <li><b>TOXXXXXIN INBOX</b> “Every question has an answer!” Send anything you want to know to the INBOX and the TOXXXXXIN gang will answer it all.</li>
+        <li><b>Special</b> Watch the first episode together with the cast</li>
+        <li>No tickets are sold · free entry for selected participants</li>
+      </ul>
+      <h4>Key dates</h4>
+      <table>
+        <tr><th>What</th><th>Thailand</th><th>Korea (KST)</th></tr>
+        <tr><td>Registration opens (only on X: GMMTV)</td><td>Mon 10/26, 12:00</td><td>Mon 10/26, 14:00</td></tr>
+        <tr><td>Registration closes (or once 254 are reached)</td><td>Tue 10/27, 12:00</td><td>Tue 10/27, 14:00</td></tr>
+        <tr><td>Results (GMMTV social media)</td><td>Thu 10/29</td><td>Thu 10/29</td></tr>
+        <tr><td>ID check & seat tickets at the venue</td><td>Sat 11/7, 16:00–19:00</td><td>Sat 11/7, 18:00–21:00</td></tr>
+        <tr><td>Standby queue opens</td><td>Sat 11/7, 18:30</td><td>Sat 11/7, 20:30</td></tr>
+      </table>
+      <h4>Registration conditions</h4>
+      <ol>
+        <li>Up to 254 participants, chosen in order of registration. One registration per person. Seat numbers in the theatre follow the registration order and are announced with the results.</li>
+        <li>Register only through the Google Form linked on X: GMMTV. Fill in every field and register only once.</li>
+        <li>The first 254 complete and valid registrations are selected. Duplicate names or emails are disqualified.</li>
+        <li>Registration closes on Tuesday, October 27 at 12:00, or as soon as 254 names are reached. A number of reserve names are also kept; if any of the first 254 are invalid or duplicated, reserves move up in order.</li>
+        <li>Results are announced on Thursday, October 29 on GMMTV's social media, with seats assigned in registration order.</li>
+        <li>Selected participants must verify their identity at the venue on Saturday, November 7, 16:00–19:00 (Thailand time), showing a national ID card or passport matching the registered name, to collect their seat ticket. Late arrivals lose their place.<br>* Empty seats may be given to the standby queue, which opens at 18:30.</li>
+      </ol>
+      <h4>Notes</h4>
+      <ul>
+        <li>Rights may not be used commercially. Beware of scams such as proxy registration, unofficial buying and selling, or people posing as company staff.</li>
+        <li>The company's decision is final, and conditions may change without prior notice.</li>
+        <li>The event will be filmed and photographed for publicity and broadcast. Anyone attending or passing by may appear; if you don't wish to, please avoid the area at that time. By appearing after this notice, you consent to your name, image, voice, video or other personal data being used for publicity, broadcast on current or future channels, and commercial purposes.</li>
+      </ul>
+      <p class="notice-src">Source: GMMTV official notice (Thai) · Unofficial fan translation. Please check the original and X: GMMTV for exact details.</p>
+    </div>
+  </template>
 </main>
 
 <footer>
@@ -1430,6 +1627,199 @@ And so begins a glamorous makeover mission, as they each discover a self that is
     nav.appendChild(sound);
     nav.appendChild(shut);
   })();
+    /* ===== 방송 일정 달력: 일정은 여기서만 고치면 돼요 ===== */
+  var SCHEDULE = {
+    first: '2026-11-07',      /* 1화 방송일 */
+    episodes: 10,             /* 총 회차 */
+    skip: [],                 /* 결방하는 토요일, 예: ['2026-12-26'] */
+    timeTH: '21:30', timeKR: '23:30',
+    from: '2026-10', to: '2027-01',   /* 달력에 보여줄 달 */
+    extra: [                  /* 기타 일정: ['날짜', '한국어', 'English', '공지 이름(없으면 생략)'] */
+      ['2026-10-26', '팬이벤트 응모 시작', 'Event sign-up opens', 'ltmy'],
+      ['2026-10-27', '응모 마감', 'Sign-up closes', 'ltmy'],
+      ['2026-10-29', '당첨 발표', 'Results', 'ltmy'],
+      ['2026-11-07', 'Love to Meet You', 'Love to Meet You', 'ltmy']
+    ]
+  };
+
+  (function () {
+    var box = document.getElementById('cal'), onair = document.getElementById('onair');
+    if (!box) return;
+    function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +(p[2] || 1)); }
+    function both(ko, en) { return '<span lang="ko">' + ko + '</span><span lang="en">' + en + '</span>'; }
+
+    var events = {}, eps = [], d = parse(SCHEDULE.first), n = 1;
+    while (n <= SCHEDULE.episodes) {
+      var k = ymd(d);
+      if (SCHEDULE.skip.indexOf(k) === -1) { eps.push({ date: k, ep: n }); (events[k] = events[k] || []).push({ ep: n }); n++; }
+      d.setDate(d.getDate() + 7);
+    }
+    SCHEDULE.extra.forEach(function (x) { (events[x[0]] = events[x[0]] || []).push({ ko: x[1], en: x[2], notice: x[3] }); });
+    /* 출연자 생일 (프로필의 birth에서 자동으로) */
+    if (typeof PROFILES !== 'undefined') {
+      var y0 = parse(SCHEDULE.from).getFullYear(), y1 = parse(SCHEDULE.to).getFullYear();
+      Object.keys(PROFILES).forEach(function (key) {
+        var b = /^(\d{4})-(\d{2})-(\d{2})$/.exec(PROFILES[key].birth || ''); if (!b) return;
+        for (var yy = y0; yy <= y1; yy++) {
+          var bk = yy + '-' + b[2] + '-' + b[3];
+          (events[bk] = events[bk] || []).push({ bday: PROFILES[key].nick, member: key, age: yy - (+b[1]) });
+        }
+      });
+    }
+
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var next = eps.filter(function (e) { return parse(e.date) >= today; })[0];
+    if (onair) {
+      if (next) {
+        var diff = Math.round((parse(next.date) - today) / 86400000);
+        var nd = parse(next.date), md = (nd.getMonth() + 1) + '/' + nd.getDate();
+        onair.innerHTML = '<div class="dday">' + (diff === 0 ? 'D-DAY' : 'D-' + diff) + '</div>' +
+          '<strong>' + both('EP' + next.ep + ' · ' + (nd.getMonth() + 1) + '월 ' + nd.getDate() + '일(토)', 'EP' + next.ep + ' · Sat ' + md) + '</strong>' +
+          '<span class="sub">' + both('한국 ' + SCHEDULE.timeKR + ' · 태국 ' + SCHEDULE.timeTH + ' · GMM25 / 넷플릭스', SCHEDULE.timeKR + ' KST · ' + SCHEDULE.timeTH + ' Thailand · GMM25 / Netflix') + '</span>';
+      } else {
+        onair.innerHTML = '<div class="dday">♡</div><strong>' + both('전 회차 방송 완료', 'All episodes aired') + '</strong><span class="sub">' + both('넷플릭스에서 다시 볼 수 있어요', 'Rewatch on Netflix') + '</span>';
+      }
+    }
+
+    var start = parse(SCHEDULE.from), end = parse(SCHEDULE.to);
+    var cur = new Date(start);
+    if (today >= start && today <= new Date(end.getFullYear(), end.getMonth() + 1, 0)) cur = new Date(today.getFullYear(), today.getMonth(), 1);
+    var DOW_KO = ['일', '월', '화', '수', '목', '금', '토'], DOW_EN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var MON_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    function draw() {
+      var y = cur.getFullYear(), m = cur.getMonth();
+      var html = '<div class="cal-head"><button type="button" class="p" aria-label="이전 달 / Previous month">‹</button>' +
+        '<h3 aria-live="polite">' + both(y + '년 ' + (m + 1) + '월', MON_EN[m] + ' ' + y) + '</h3>' +
+        '<button type="button" class="n" aria-label="다음 달 / Next month">›</button></div><div class="cal-grid">';
+      for (var i = 0; i < 7; i++) html += '<div class="cal-dow">' + both(DOW_KO[i], DOW_EN[i]) + '</div>';
+      var firstDow = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate(), list = '';
+      for (i = 0; i < firstDow; i++) html += '<div class="cal-day empty"></div>';
+      for (var day = 1; day <= days; day++) {
+        var dt = new Date(y, m, day), key = ymd(dt), evs = events[key] || [];
+        var cls = 'cal-day' + (dt.getDay() === 6 ? ' sat' : '') + (dt.getTime() === today.getTime() ? ' today' : '');
+        html += '<div class="' + cls + '">' + day;
+        evs.forEach(function (e) {
+          if (e.ep) {
+            html += '<span class="cal-ev">EP' + e.ep + '</span>';
+            list += '<li><b>' + both((m + 1) + '.' + day + ' (토)', MON_EN[m].slice(0, 3) + ' ' + day + ' (Sat)') + '</b>' +
+              both('EP' + e.ep + ' · 한국 ' + SCHEDULE.timeKR + ' / 태국 ' + SCHEDULE.timeTH + ' · GMM25 · 넷플릭스', 'EP' + e.ep + ' · ' + SCHEDULE.timeKR + ' KST / ' + SCHEDULE.timeTH + ' Thailand · GMM25 · Netflix') + '</li>';
+           } else if (e.bday) {
+            var bl = '<button type="button" class="cal-ev bday" data-member="' + e.member + '">🎂 ' + e.bday + '</button>';
+            html += bl;
+            list += '<li><b>' + both((m + 1) + '.' + day, MON_EN[m].slice(0, 3) + ' ' + day) + '</b>' +
+              '<button type="button" data-member="' + e.member + '">' + both('🎂 ' + e.bday + ' 생일 (만 ' + e.age + '세)', '🎂 ' + e.bday + "'s birthday (turns " + e.age + ')') + '</button></li>';
+          } else {
+            var label = both(e.ko, e.en);
+            var label = both(e.ko, e.en);
+            if (e.notice) {
+              html += '<button type="button" class="cal-ev extra" data-notice="' + e.notice + '">' + label + '</button>';
+              label = '<button type="button" data-notice="' + e.notice + '">' + label + '</button>';
+            } else {
+              html += '<span class="cal-ev extra">' + label + '</span>';
+            }
+            list += '<li><b>' + both((m + 1) + '.' + day, MON_EN[m].slice(0, 3) + ' ' + day) + '</b>' + label + '</li>';
+          }
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+      if (list) html += '<ul class="cal-list">' + list + '</ul>';
+      html += '<p class="cal-note">' + both('결방·시간 변경은 GMMTV 공식 공지를 확인해 주세요.', 'Check GMMTV official notices for schedule changes.') + '</p>';
+      box.innerHTML = html;
+      var p = box.querySelector('.p'), nx = box.querySelector('.n');
+      p.disabled = y === start.getFullYear() && m === start.getMonth();
+      nx.disabled = y === end.getFullYear() && m === end.getMonth();
+      p.addEventListener('click', function () { cur = new Date(y, m - 1, 1); draw(); box.querySelector('.p:not(:disabled), .n').focus(); });
+      nx.addEventListener('click', function () { cur = new Date(y, m + 1, 1); draw(); (box.querySelector('.n:not(:disabled)') || box.querySelector('.p')).focus(); });
+    }
+    draw();
+
+    var dlg = document.getElementById('notice'), body = document.getElementById('notice-body');
+    box.addEventListener('click', function (e) {
+      var mb = e.target.closest('[data-member]');
+      if (mb) { if (window.hbd) window.hbd(mb.getAttribute('data-member')); return; }
+      var b = e.target.closest('[data-notice]'); if (!b || !dlg || !dlg.showModal) return;
+      var t = document.getElementById('notice-' + b.getAttribute('data-notice')); if (!t) return;
+      body.innerHTML = t.innerHTML; dlg.showModal(); dlg.scrollTop = 0;
+    });
+    if (dlg) {
+      dlg.querySelector('.notice-close').addEventListener('click', function () { dlg.close(); });
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    }
+  })();
+  /* ===== 생일 축하: HBD (이름)! + 폭죽 ===== */
+  window.hbd = function (key) {
+    var p = (typeof PROFILES !== 'undefined') && PROFILES[key]; if (!p) return;
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(p.birth || '');
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var sub = '';
+    if (m) {
+      var best = null;
+      [-1, 0, 1].forEach(function (k) {
+        var y = today.getFullYear() + k, d = new Date(y, +m[2] - 1, +m[3]);
+        if (!best || Math.abs(d - today) < Math.abs(best.d - today)) best = { d: d, age: y - (+m[1]) };
+      });
+      sub = '<span lang="ko">🎂 ' + (+m[2]) + '월 ' + (+m[3]) + '일 · 만 ' + best.age + '세</span>' +
+            '<span lang="en">🎂 ' + (+m[2]) + '/' + (+m[3]) + ' · turns ' + best.age + '</span>';
+    }
+    var wrap = document.createElement('div');
+    wrap.className = 'hbd'; wrap.setAttribute('role', 'dialog'); wrap.setAttribute('aria-label', 'HBD ' + p.nick); wrap.tabIndex = -1;
+    wrap.innerHTML = '<canvas></canvas><div class="hbd-card">' +
+      '<div class="hbd-photo"><img src="' + p.photos[0] + '" alt="" onerror="this.remove()"></div>' +
+      '<p class="hbd-title">HBD ' + p.nick + '!</p><p class="hbd-sub">' + sub + '</p>' +
+      '<p class="hbd-tap"><span lang="ko">아무 곳이나 누르면 닫혀요</span><span lang="en">Tap anywhere to close</span></p></div>';
+    document.body.appendChild(wrap); wrap.focus();
+
+    var running = true;
+    function close() { running = false; wrap.remove(); document.removeEventListener('keydown', onKey); }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    wrap.addEventListener('click', close); document.addEventListener('keydown', onKey);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cv = wrap.querySelector('canvas'), ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function size() { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    size(); window.addEventListener('resize', size);
+    var COLORS = ['#FF4FB0', '#E6198A', '#E4F03E', '#FFFFFF', '#8FD3F4', '#C9B6F2'];
+    var parts = [], t0 = performance.now(), lastBurst = 0;
+    function burst(x, y) {
+      var n = 46, c = COLORS[Math.floor(Math.random() * COLORS.length)];
+      for (var i = 0; i < n; i++) {
+        var a = (Math.PI * 2 * i) / n, s = 2.2 + Math.random() * 3.2;
+        parts.push({ x: x, y: y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1, c: Math.random() < .3 ? '#fff' : c, r: 2 + Math.random() * 1.6, k: 'spark' });
+      }
+    }
+    function confetti() {
+      for (var i = 0; i < 6; i++) parts.push({
+        x: Math.random() * innerWidth, y: -10, vx: (Math.random() - .5) * 1.5, vy: 1.5 + Math.random() * 2,
+        life: 1, c: COLORS[Math.floor(Math.random() * COLORS.length)], r: 4 + Math.random() * 4, rot: Math.random() * 6, k: 'paper'
+      });
+    }
+    function frame(now) {
+      if (!running) { window.removeEventListener('resize', size); return; }
+      var el = now - t0;
+      if (el < 4000 && now - lastBurst > 380) {
+        lastBurst = now;
+        burst(innerWidth * (0.15 + Math.random() * 0.7), innerHeight * (0.12 + Math.random() * 0.4));
+      }
+      if (el < 4500) confetti();
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var q = parts[i];
+        if (q.k === 'spark') { q.vy += 0.05; q.vx *= 0.985; q.vy *= 0.985; q.life -= 0.012; }
+        else { q.vy += 0.02; q.rot += 0.1; q.life -= 0.004; }
+        q.x += q.vx; q.y += q.vy;
+        if (q.life <= 0 || q.y > innerHeight + 20) { parts.splice(i, 1); continue; }
+        ctx.globalAlpha = Math.max(q.life, 0); ctx.fillStyle = q.c;
+        if (q.k === 'spark') { ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, Math.PI * 2); ctx.fill(); }
+        else { ctx.save(); ctx.translate(q.x, q.y); ctx.rotate(q.rot); ctx.fillRect(-q.r / 2, -q.r / 4, q.r, q.r / 2); ctx.restore(); }
+      }
+      ctx.globalAlpha = 1;
+      if (el < 9000 || parts.length) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  };
 </script>
 </body>
 </html>
