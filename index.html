@@ -878,6 +878,81 @@
   .ost-side ol { margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.8; }
   .ost-side ol a { color: var(--ink); text-decoration-color: var(--pink); text-underline-offset: 3px; }
   .ost-side .how { font-size: 13px; color: var(--ink-soft); margin-top: 14px; }
+  /* ===== 책장 ===== */
+  .shelf { position: relative; max-width: 860px; margin: 0 auto; padding: 0 12px 20px; }
+  .shelf-row {
+    display: flex; align-items: flex-end; gap: 6px; min-height: 230px; padding: 0 22px;
+    position: relative;
+  }
+  .shelf-row::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -16px; height: 16px; border-radius: 3px;
+    background: linear-gradient(#F3D9B8, #D9B48A); box-shadow: 0 8px 14px rgba(36,49,95,.18), inset 0 2px 0 rgba(255,255,255,.5);
+  }
+  .shelf-row + .shelf-row { margin-top: 56px; }
+  .spine {
+    --h: 200px; --w: 46px;
+    position: relative; height: var(--h); width: var(--w); flex: none; border: 0; padding: 14px 0; cursor: pointer;
+    border-radius: 3px 3px 2px 2px; color: #fff; font-family: var(--clean); font-weight: 800; font-size: 14px; letter-spacing: .04em;
+    writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,.18) 0 3px, rgba(255,255,255,.18) 3px 5px, transparent 5px calc(100% - 4px), rgba(0,0,0,.15) calc(100% - 4px)),
+      var(--c, var(--pink));
+    box-shadow: inset 0 10px 0 rgba(255,255,255,.12), inset 0 -10px 0 rgba(0,0,0,.08), 2px 0 4px rgba(36,49,95,.15);
+    transition: transform .2s ease;
+  }
+  .spine::before, .spine::after {
+    content: ""; position: absolute; left: 6px; right: 6px; height: 2px; background: rgba(255,255,255,.55);
+  }
+  .spine::before { top: 9px; } .spine::after { bottom: 9px; }
+  .spine.light { color: var(--ink); }
+  .spine.light::before, .spine.light::after { background: rgba(36,49,95,.35); }
+  .spine.lean { transform: rotate(-6deg); transform-origin: bottom left; margin-left: 10px; }
+  .spine:hover, .spine:focus-visible { transform: translateY(-14px); }
+  .spine.lean:hover, .spine.lean:focus-visible { transform: rotate(-6deg) translateY(-14px); }
+  .bookend {
+    width: 30px; height: 120px; flex: none; align-self: flex-end; border-radius: 4px 14px 0 0;
+    background: var(--ink); box-shadow: 2px 0 4px rgba(36,49,95,.2);
+  }
+  .shelf-plant { margin-left: auto; align-self: flex-end; font-size: 46px; line-height: 1; }
+  .shelf-dlg {
+    border: 0; padding: 0; width: min(94vw, 680px); max-height: 90vh; overflow: auto;
+    background: #FFFDF8; color: var(--ink); border-radius: 14px; box-shadow: 0 24px 70px rgba(0,0,0,.35);
+  }
+  .shelf-dlg::backdrop { background: rgba(26, 94, 130, .6); }
+  .shelf-dlg[open] .cover { animation: pull-out .5s cubic-bezier(.2,.9,.3,1.1) both; }
+  @keyframes pull-out { from { transform: perspective(900px) rotateY(-70deg) translateX(-30px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .shelf-in { display: grid; grid-template-columns: 210px 1fr; gap: 24px; padding: 26px; }
+  @media (max-width: 600px) { .shelf-in { grid-template-columns: 1fr; } .shelf-dlg .cover { max-width: 220px; } }
+  .shelf-dlg .cover {
+    aspect-ratio: 2 / 3; border-radius: 3px 8px 8px 3px; overflow: hidden; display: grid; place-items: center; padding: 14px;
+    color: #fff; font-weight: 800; font-size: 20px; text-align: center; line-height: 1.3;
+    background: linear-gradient(90deg, rgba(0,0,0,.2) 0 6px, transparent 6px), var(--c, var(--pink));
+    box-shadow: 6px 6px 0 var(--board), 0 10px 24px rgba(36,49,95,.2);
+  }
+  .shelf-dlg .cover.has-img { padding: 0; }
+  .shelf-dlg .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shelf-dlg h3 { font-size: 24px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 4px; line-height: 1.3; }
+  .shelf-dlg .by { color: var(--ink-soft); font-size: 15px; margin: 0 0 14px; }
+  .shelf-dlg .where {
+    display: inline-block; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+    background: var(--lime); color: var(--ink); margin-bottom: 12px;
+  }
+  .shelf-dlg .about { font-size: 15px; line-height: 1.8; }
+  .shelf-dlg .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .shelf-dlg .links a {
+    text-decoration: none; font-size: 14px; font-weight: 700; padding: 7px 14px; border-radius: 999px;
+    background: var(--pink); color: #fff; box-shadow: 2px 2px 0 var(--ink);
+  }
+  .shelf-close {
+    position: sticky; top: 10px; float: right; margin: 10px 10px 0 0; z-index: 2;
+    width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--pink); color: #fff; font-size: 20px; line-height: 1; cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) { .spine { transition: none; } .shelf-dlg[open] .cover { animation: none; } }
+  .shelf-dlg .still { display: block; width: 100%; border-radius: 8px; margin-top: 16px; box-shadow: 0 6px 16px rgba(36,49,95,.18); }
+  .shelf-dlg .book-credit { font-size: 13px; color: var(--ink-soft); margin: 14px 0 0; }
+  .shelf-dlg .book-credit a { color: var(--pink); font-weight: 700; text-decoration: none; }
+  .cal-ev.extra.fan { background: #EEE6FB; color: #5B3FA0; box-shadow: inset 0 0 0 1.5px #9B7FD6; border: 1.5px dashed #9B7FD6; }
+  .cal-legend .k.fan { background: #EEE6FB; border: 1.5px dashed #9B7FD6; }
 </style>
 </head>
 <body>
@@ -890,6 +965,7 @@
     <a href="#cast"><span lang="ko">인물·배우</span><span lang="en">Cast</span></a>
     <a href="#videos"><span lang="ko">영상</span><span lang="en">Videos</span></a>
     <a href="#ost"><span lang="ko">OST</span><span lang="en">OST</span></a>
+    <a href="#shelf"><span lang="ko">책장</span><span lang="en">Books</span></a>
     <a href="#album"><span lang="ko">앨범</span><span lang="en">Album</span></a>
   </nav>
   <div class="lang" role="group" aria-label="Language">
@@ -1144,9 +1220,18 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       </div>
     </div>
   </section>
+  <section id="shelf">
+    <h2><span lang="ko">책장</span><span lang="en">Bookshelf</span></h2>
+    <p class="note-hand"><span lang="ko">드라마 속에 나온 책들 · 책을 누르면 꺼내 볼 수 있습니다.</span><span lang="en">Books from the drama · tap a book to take it out</span></p>
+    <div class="shelf" id="shelf-box"></div>
+    <dialog class="shelf-dlg" id="shelf-dlg" aria-labelledby="shelf-title">
+      <button type="button" class="shelf-close" aria-label="닫기 / Close">×</button>
+      <div class="shelf-in" id="shelf-in"></div>
+    </dialog>
+  </section>
   <section id="album">
     <h2><span lang="ko">앨범</span><span lang="en">Album</span></h2>
-    <p class="note-hand"><span lang="ko">누르면 크게 보여요</span><span lang="en">Photos from the official Instagram @oxytoxinseries · tap to enlarge</span></p>
+    <p class="note-hand"><span lang="ko">누르면 크게 볼 수 있습니다.</span><span lang="en">Photos from the official Instagram @oxytoxinseries · tap to enlarge</span></p>
     <div class="album-page">
       <span class="album-label">TOXXXXIN ALBUM ♡</span>
       <ul class="album-grid">
@@ -1492,6 +1577,67 @@ And so begins a glamorous makeover mission, as they each discover a self that is
         <tr><td>14:00</td><td>16:00</td><td>Praew Magazine interview</td></tr>
       </table>
       <p class="notice-src">Source: GMMTV official poster · Times are Thailand time;</p>
+    </div>
+  </template>
+  <template id="notice-fan1">
+    <h3>Oxytoxin 팬클럽 모임 · Fan Gathering</h3>
+    <div class="notice-imgs">
+      <img src="notice/fan1-1.jpg" alt="팬클럽 모임 응모 공지 (태국어)">
+      <img src="notice/fan1-2.jpg" alt="Fan gathering registration notice (English)">
+    </div>
+
+    <div lang="ko">
+      <h4>모임 개요</h4>
+      <ul>
+        <li><b>주최</b> 빵 팬클럽 @PANGSab_offc · 요거트 팬클럽 @yoghurty_family (팬 주최, GMMTV 공식 행사 아님)</li>
+        <li><b>일시</b> 2026년 10월 24일(토) 18:30 (한국 20:30)</li>
+        <li><b>장소</b> 방콕 GMM Grammy Place 건물 로비</li>
+        <li><b>인원</b> 200명</li>
+      </ul>
+      <h4>응모 일정</h4>
+      <table>
+        <tr><th>일정</th><th>태국 시간</th><th>한국 시간</th></tr>
+        <tr><td>응모 링크 게시 · @PANGSab_offc</td><td>10/23(금) 12:00</td><td>10/23(금) 14:00</td></tr>
+        <tr><td>응모 링크 게시 · @yoghurty_family</td><td>10/23(금) 12:10</td><td>10/23(금) 14:10</td></tr>
+        <tr><td>선정자 명단 발표</td><td>10/23(금) 17:30</td><td>10/23(금) 19:30</td></tr>
+        <tr><td>팬클럽 모임</td><td>10/24(토) 18:30</td><td>10/24(토) 20:30</td></tr>
+      </table>
+      <h4>응모 조건</h4>
+      <ol>
+        <li>1인 1회만 이름 등록 가능. 중복 등록 확인 시 즉시 자격 취소.</li>
+        <li>이름은 신분증·여권과 같은 영문으로 등록. 다른 언어로 쓰거나 신분증과 다른 이름은 즉시 자격 취소.</li>
+        <li>이름 변경, 양도, 자격 매매, 타인 사칭 금지. 적발 시 즉시 자격 취소.</li>
+        <li>선정된 200명은 응모 순서대로 대기 번호 배정.</li>
+      </ol>
+  
+      </ul>
+      <p class="notice-src">원문: 두 팬클럽의 X 공지(태국어·영어) · 비공식 팬 번역. 정확한 내용은 각 팬클럽 X 계정 참고.</p>
+    </div>
+
+    <div lang="en">
+      <h4>About</h4>
+      <ul>
+        <li><b>Hosted by</b> Pang fan club @PANGSab_offc · Yoghurt fan club @yoghurty_family (fan-hosted, not an official GMMTV event)</li>
+        <li><b>When</b> Saturday, October 24, 2026, 18:30 (20:30 KST)</li>
+        <li><b>Where</b> Lobby, GMM Grammy Place, Bangkok</li>
+        <li><b>Capacity</b> 200 people</li>
+      </ul>
+      <h4>Key dates</h4>
+      <table>
+        <tr><th>What</th><th>Thailand</th><th>Korea (KST)</th></tr>
+        <tr><td>Form link posted · @PANGSab_offc</td><td>Fri 10/23, 12:00</td><td>Fri 10/23, 14:00</td></tr>
+        <tr><td>Form link posted · @yoghurty_family</td><td>Fri 10/23, 12:10</td><td>Fri 10/23, 14:10</td></tr>
+        <tr><td>Selected participants announced</td><td>Fri 10/23, 17:30</td><td>Fri 10/23, 19:30</td></tr>
+        <tr><td>Fan gathering</td><td>Sat 10/24, 18:30</td><td>Sat 10/24, 20:30</td></tr>
+      </table>
+      <h4>Conditions</h4>
+      <ol>
+        <li>One registration per person. Duplicates are disqualified.</li>
+        <li>Register with your full name in English exactly as on your ID card or passport. Other languages or mismatched names are disqualified.</li>
+        <li>No name changes, transfers, buying or selling of slots, or impersonation.</li>
+        <li>The 200 selected participants get queue numbers in order of registration.</li>
+      </ol>
+      <p class="notice-src">Source: X notices from both fan clubs (Thai & English) · Unofficial fan translation. Check each fan club's X account for exact details.</p>
     </div>
   </template>
 </main>
@@ -1852,6 +1998,8 @@ And so begins a glamorous makeover mission, as they each discover a self that is
     timeTH: '21:30', timeKR: '23:30',
     from: '2026-10', to: '2027-01',   /* 달력에 보여줄 달 */
     extra: [                  /* 기타 일정: ['날짜', '한국어', 'English', '공지 이름(없으면 생략)'] */
+      ['2026-10-23', '팬클럽 모임 응모', 'Fan gathering sign-up', 'fan1', 'fan'],
+      ['2026-10-24', '팬클럽 모임', 'Fan gathering', 'fan1', 'fan'],
       ['2026-10-24', '프레스 투어 · LIVE', 'Press tour · LIVE', 'press'],
       ['2026-10-25', '프레스 투어', 'Press tour', 'press'],
       ['2026-10-26', '팬이벤트 응모 시작', 'Event sign-up opens', 'ltmy', 'apply'],
@@ -1945,7 +2093,7 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       }
       html += '</div>';
       if (list) html += '<ul class="cal-list">' + list + '</ul>';
-      html += '<div class="cal-legend"><span class="k ep">EP</span>' + both('본방송', 'Episode') + '<span class="k sched"></span>' + both('공식 일정', 'Official') + '<span class="k apply"></span>' + both('응모·발표', 'Sign-up & results') + '<span class="k bday">🎂</span>' + both('생일', 'Birthday') + '</div>';
+      html += '<div class="cal-legend"><span class="k ep">EP</span>' + both('본방송', 'Episode') + '<span class="k sched"></span>' + both('공식 일정', 'Official') + '<span class="k apply"></span>' + both('응모·발표', 'Sign-up & results') + '<span class="k fan"></span>' + both('팬클럽 주최', 'Fan-hosted') + '<span class="k bday">🎂</span>' + both('생일', 'Birthday') + '</div>';
       html += '<p class="cal-note">' + both('결방·시간 변경은 GMMTV 공식 공지를 확인해 주세요.', 'Check GMMTV official notices for schedule changes.') + '</p>';
       box.innerHTML = html;
       var p = box.querySelector('.p'), nx = box.querySelector('.n');
@@ -2129,6 +2277,71 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       return '<li>' + (u ? '<a href="' + u + '" target="_blank" rel="noopener">' + name + '</a>' : name) + '</li>';
     }).join('');
     drawList();
+  })();
+  /* ===== 책장: 책은 여기서만 고치면 돼요 ===== */
+  var SHELF = [
+    {
+      title: 'OXYTOXIN จุนใจไอดาว', spine: 'OXYTOXIN',
+      author: { ko: 'Oxin 글 · Toythoy 그림', en: 'Written by Oxin · Illustrated by Toythoy' },
+      color: '#E6198A', cover: 'books/oxytoxin-novel.jpg',
+      where: { ko: '드라마 공식 소설', en: 'Official novel' },
+      about: { ko: '학교에서 가장 예쁘고 부유하고 짓궂은 언니들 무리 TOXXXXIN과 후배 준짜이의 이야기를 담은 드라마 공식 소설.', en: 'The official novel about TOXXXXIN, the prettiest, richest and most wicked girls at school, and their junior Junjai.' },
+      links: [ ['e-Book · GMMTV e-BOOK', 'https://ebook.gmm-tv.com/product/78'], ['GMMTV SHOP', 'https://shop.gmm-tv.com/product/oxytoxin-novel-thai-version-th'] ]
+    },
+    {
+      title: 'Essential Writing Skills for College and Beyond', spine: 'WRITING SKILLS',
+      author: { ko: 'C.M. Gill (Charlene Gill)', en: 'C.M. Gill (Charlene Gill)' },
+      color: '#2A2A2A', cover: 'books/essential-writing.jpg', still: 'books/consumed-scene.jpg', credit: 'tonnkhawchive', credit: 'tonnkhawchive',
+      where: { ko: '공식 트레일러 · 책으로 얼굴을 가린 두 사람', en: 'Official trailer · Two faces hidden behind a book' },
+      about: { ko: '대학 글쓰기 안내서. 생각을 정리하고, 자료를 찾고, 초안을 쓰고 다듬는 실용적인 방법을 다룸. 2014년 Writer\'s Digest Books 출간.', en: 'A guide to college writing, with practical strategies for organizing ideas, researching, drafting and polishing. Published by Writer\'s Digest Books in 2014.' },
+      links: [ ['출판사 페이지 / Publisher', 'https://www.penguinrandomhouse.com/books/633915/essential-writing-skills-for-college-and-beyond-by-cm-gill'] ]
+    },
+    {
+      title: 'Consumed', spine: 'CONSUMED',
+      author: { ko: 'Abbie Rushton', en: 'Abbie Rushton' },
+      color: '#3FA9C4', cover: 'books/consumed.jpg', still: 'books/consumed-scene.jpg', credit: 'tonnkhawchive',
+      where: { ko: '공식 트레일러 · 침대 위에 놓인 책', en: 'Official trailer · Book left on the bed' },
+      about: { ko: '바닷가에서 언니를 잃은 뒤 2년째 집 밖으로 나가지 못하는 마일라가 온라인에서 제이미를 만나며 서로의 비밀과 진실에 다가가는 영어덜트 소설. 2016년 영국 Atom 출간. ※ 상실과 불안 등 무거운 주제 주의.', en: 'A young adult novel about Myla, who hasn\'t left the house in two years since losing her sister at the beach, until she meets Jamie online. Published by Atom (UK) in 2016. Note: deals with heavy themes such as loss and anxiety.' },
+      links: [ ['출판사 작가 페이지 / Publisher', 'https://www.thecrimevault.com/contributor/abbie-todd/'] ]
+    }
+  ];
+
+  (function () {
+    var box = document.getElementById('shelf-box'); if (!box) return;
+    var dlg = document.getElementById('shelf-dlg'), inner = document.getElementById('shelf-in');
+    function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+    function both(o) { return o ? '<span lang="ko">' + esc(o.ko) + '</span><span lang="en">' + esc(o.en) + '</span>' : ''; }
+    function isLight(hex) {
+      var m = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex || ''); if (!m) return false;
+      return (parseInt(m[1], 16) * 299 + parseInt(m[2], 16) * 587 + parseInt(m[3], 16) * 114) / 1000 > 160;
+    }
+    var PER_ROW = window.matchMedia('(max-width: 600px)').matches ? 6 : 12;
+    var html = '';
+    for (var r = 0; r < Math.max(1, Math.ceil(SHELF.length / PER_ROW)); r++) {
+      html += '<div class="shelf-row">' + (r === 0 ? '<span class="bookend" aria-hidden="true"></span>' : '');
+      SHELF.slice(r * PER_ROW, (r + 1) * PER_ROW).forEach(function (b, j) {
+        var i = r * PER_ROW + j, h = 170 + ((i * 37) % 50), w = 40 + ((i * 13) % 16);
+        var cls = 'spine' + (isLight(b.color) ? ' light' : '') + (i % 5 === 4 ? ' lean' : '');
+        html += '<button type="button" class="' + cls + '" data-i="' + i + '" style="--c:' + esc(b.color) + ';--h:' + h + 'px;--w:' + w + 'px" aria-label="' + esc(b.title) + '">' + esc(b.spine || b.title) + '</button>';
+      });
+      html += (r === 0 ? '<span class="shelf-plant" aria-hidden="true">🪴</span>' : '') + '</div>';
+    }
+    box.innerHTML = html;
+
+    box.addEventListener('click', function (e) {
+      var s = e.target.closest('.spine'); if (!s || !dlg.showModal) return;
+      var b = SHELF[+s.getAttribute('data-i')];
+      var cover = b.cover
+        ? '<div class="cover has-img" style="--c:' + esc(b.color) + '"><img src="' + esc(b.cover) + '" alt="' + esc(b.title) + '"></div>'
+        : '<div class="cover" style="--c:' + esc(b.color) + '">' + esc(b.title) + '</div>';
+      var links = (b.links || []).map(function (l) { return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + '</a>'; }).join('');
+      inner.innerHTML = cover + '<div><h3 id="shelf-title">' + esc(b.title) + '</h3><p class="by">' + both(b.author) + '</p>' +
+        (b.where ? '<span class="where">' + both(b.where) + '</span>' : '') +
+        '<p class="about">' + both(b.about) + '</p>' + (b.still ? '<img class="still" src="' + esc(b.still) + '" alt="">' : '') +(links ? '<div class="links">' + links + '</div>' : '') + (b.credit ? '<p class="book-credit">' + both({ ko: '책 정보 출처', en: 'Book info by' }) + ' <a href="https://x.com/' + esc(b.credit) + '" target="_blank" rel="noopener">@' + esc(b.credit) + '</a></p>' : '') + '</div>';
+      dlg.showModal(); dlg.scrollTop = 0;
+    });
+    dlg.querySelector('.shelf-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   })();
 </script>
 </body>
