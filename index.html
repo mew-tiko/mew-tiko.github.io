@@ -11,22 +11,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&family=Gowun+Dodum&family=Nanum+Pen+Script&family=Mali:wght@500;600&family=Charmonman:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root {
-    --board: #1E4A47;
-    --board-deep: #143634;
+    --board: #2B8BB8;
+    --board-deep: #1A5E82;
     --pink: #E6198A;
     --pink-hi: #FF5FB8;
-    --lime: #D4F53C;
-    --lavender: #E9E4F5;
+    --lime: #E4F03E;
+    --lavender: #F0ECF7;
     --navy: #1C2547;
 
-    --page: #F3F0F9;
+    --page: #F2EEEA;
     --surface: #FFFFFF;
-    --ink: #1C2547;
-    --ink-soft: #545C7A;
-    --rule: #D9D2EC;
-    --ruled-line: #E4DFF2;
-    --chip-bg: #1C2547;
-    --chip-ink: #D4F53C;
+    --ink: #24315F;
+    --ink-soft: #5E6688;
+    --rule: #DED6CE;
+    --ruled-line: #ECE6E0;
 
     --display: "Playfair Display", "Times New Roman", serif;
     --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
@@ -39,31 +37,6 @@
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --page: #0F1F1E;
-      --surface: #172C2A;
-      --ink: #EEEAF6;
-      --ink-soft: #AAB8C2;
-      --rule: #29433F;
-      --ruled-line: #1F3734;
-      --chip-bg: #D4F53C;
-      --chip-ink: #1C2547;
-      color-scheme: dark;
-    }
-  }
-  :root[data-theme="dark"] {
-    --page: #0F1F1E;
-    --surface: #172C2A;
-    --ink: #EEEAF6;
-    --ink-soft: #AAB8C2;
-    --rule: #29433F;
-    --ruled-line: #1F3734;
-    --chip-bg: #D4F53C;
-    --chip-ink: #1C2547;
-    color-scheme: dark;
-  }
-
   *, *::before, *::after { box-sizing: inherit; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 64px); }
   body {
@@ -88,8 +61,6 @@
   html[data-lang="ko"] [lang="en"]:not(html) { display: none !important; }
   html[data-lang="en"] [lang="ko"]:not(html) { display: none !important; }
 
-  /* the hero, updates and subtitles keep the original handwritten feel */
-  .hero { font-family: var(--body); }
 
   /* ---------- top bar ---------- */
   .bar {
@@ -118,66 +89,10 @@
     background: transparent; color: var(--lime);
   }
   .lang button[aria-pressed="true"] { background: var(--lime); color: var(--navy); }
-  @media (max-width: 640px) { .bar nav { display: none; } }
 
-  /* ---------- hero: the chalkboard ---------- */
-  .hero {
-    position: relative; overflow: hidden;
-    background:
-      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.07), transparent 55%),
-      radial-gradient(ellipse at 85% 90%, rgba(0,0,0,.25), transparent 60%),
-      var(--board);
-    color: var(--lavender);
-    padding: clamp(56px, 10vw, 110px) clamp(20px, 5vw, 56px) clamp(64px, 9vw, 96px);
-  }
+  /* ---------- hero ---------- */
+  .hero { position: relative; overflow: hidden; color: var(--lavender); }
   .hero-inner { max-width: 1040px; margin: 0 auto; position: relative; }
-  .hero .chalk {
-    font-family: var(--hand); font-size: clamp(22px, 3vw, 28px);
-    color: rgba(233,228,245,.72); margin: 0 0 6px; line-height: 1.3;
-  }
-  .logo {
-    font-family: var(--display); font-style: italic; font-weight: 900;
-    font-size: clamp(76px, 17vw, 196px); line-height: .9; letter-spacing: -.02em;
-    margin: 0; color: var(--pink);
-    background:
-      radial-gradient(circle at 12% 30%, #fff 0 1px, transparent 2px),
-      radial-gradient(circle at 38% 70%, #ffd6ee 0 1px, transparent 2px),
-      radial-gradient(circle at 64% 25%, #fff 0 1.2px, transparent 2.2px),
-      radial-gradient(circle at 84% 62%, #ffd6ee 0 1px, transparent 2px),
-      linear-gradient(115deg, #C40F74 0%, var(--pink) 30%, var(--pink-hi) 48%, var(--pink) 64%, #B80D6C 100%);
-    background-size: 23px 19px, 31px 27px, 17px 29px, 37px 21px, 220% 100%;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 2.4s ease-out 1 both;
-    filter: drop-shadow(0 4px 0 rgba(20,54,52,.55));
-  }
-  @keyframes shimmer {
-    from { background-position: 0 0, 0 0, 0 0, 0 0, 100% 0; }
-    to   { background-position: 0 0, 0 0, 0 0, 0 0, 0% 0; }
-  }
-  .thai-title {
-    font-family: "Charmonman", var(--thai); font-weight: 700; color: var(--lime);
-    font-size: clamp(36px, 6.5vw, 64px); margin: 4px 0 0 clamp(8px, 6vw, 90px);
-    transform: rotate(-4deg); transform-origin: left; display: inline-block; line-height: 1.4;
-  }
-  .thai-title small { font-family: var(--hand); font-size: .6em; margin-left: 10px; color: var(--lime); opacity: .85; }
-  .hero-lede {
-    max-width: 34em; margin: 34px 0 0; font-size: clamp(17px, 2vw, 19px); color: var(--lavender);
-  }
-  .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-  .sticker {
-    font-size: 14px; padding: 5px 14px; border-radius: 999px; line-height: 1.5;
-    background: var(--lavender); color: var(--navy);
-    box-shadow: 2px 2px 0 var(--board-deep);
-  }
-  .sticker.hot { background: var(--pink); color: #fff; transform: rotate(-2deg); }
-  .sticker.lime { background: var(--lime); color: var(--navy); transform: rotate(1.5deg); }
-  .scribble {
-    position: absolute; right: 0; bottom: -18px;
-    font-family: var(--hand); color: var(--lime); font-size: clamp(30px, 4.6vw, 48px);
-    transform: rotate(-8deg); line-height: 1; pointer-events: none;
-  }
-  @media (max-width: 720px) { .scribble { position: static; display: block; margin-top: 30px; transform: rotate(-4deg); } }
 
   /* ---------- sections ---------- */
   main { max-width: 1040px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px) 80px; }
@@ -186,15 +101,7 @@
     font-family: var(--clean); font-weight: 800; letter-spacing: -.025em;
     font-size: clamp(32px, 4.6vw, 46px); line-height: 1.15; margin: 0 0 8px; color: var(--ink);
   }
-  #news h2, #subtitles h2 {
-    font-family: var(--display); font-style: italic; font-weight: 700; letter-spacing: 0;
-    font-size: clamp(34px, 5vw, 50px); line-height: 1.1; margin: 0 0 6px;
-  }
-  html[data-lang="ko"] #news h2, html[data-lang="ko"] #subtitles h2 { font-family: var(--body); font-style: normal; font-weight: 400; letter-spacing: -.02em; }
   .note-hand { font-size: 16px; font-weight: 600; color: var(--pink); margin: 0 0 28px; }
-  #news .note-hand, #subtitles .note-hand {
-    font-family: var(--hand); font-size: 25px; font-weight: 400; line-height: 1.3;
-  }
   p { margin: 0 0 14px; max-width: 40em; }
 
   /* notebook paper */
@@ -209,26 +116,19 @@
     line-height: 34px;
   }
   .paper p { line-height: 34px; }
-  .about-grid { display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: 20px; align-items: start; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } .poster { max-width: 360px; } }
-  .about-grid-2 { display: grid; grid-template-columns: minmax(0, 600px) 1fr; gap: 20px; align-items: start; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } .poster { max-width: 360px; } }
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 26px; }
+  .posters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; outline: none; }
   .poster { margin: 0; transform: rotate(-1.5deg); }
+  .poster:nth-child(even) { transform: rotate(1.5deg); }
+  .poster-dots { display: none; justify-content: center; gap: 6px; margin-top: 6px; }
+  .poster-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: var(--rule); cursor: pointer; transition: width .2s ease; }
+  .poster-dots button.on { width: 20px; background: var(--pink); }
+  .poster-cap { font-size: 13px; color: var(--ink-soft); margin: 14px 0 0; line-height: 1.5; }
+  .poster-cap .swipe { display: none; }
   .poster img {
     display: block; width: 100%; height: auto; border-radius: 6px;
     border: 6px solid #fff; box-shadow: 6px 6px 0 var(--board);
   }
-  .poster-2 { margin: 0; transform: rotate(1.5deg); }
-  .poster-2 img {
-    display: block; width: 100%; height: auto; border-radius: 6px;
-    border: 6px solid #fff; box-shadow: 6px 6px 0 var(--board);
-  }
-  .poster-3 { margin: 0; transform: rotate(-1.5deg); }
-  .poster-3 img {
-    display: block; width: 100%; height: auto; border-radius: 6px;
-    border: 6px solid #fff; box-shadow: 6px 6px 0 var(--board);
-  }
-  .poster figcaption { font-size: 13px; color: var(--ink-soft); margin-top: 12px; line-height: 1.5; }
   .pilot {
     display: grid; grid-template-columns: minmax(0, 220px) 1fr; gap: 18px; align-items: center;
     margin-top: 22px; padding: 14px; border-radius: 12px; text-decoration: none; color: inherit;
@@ -296,50 +196,6 @@
   .bow::before { left: 0; clip-path: polygon(0 0, 100% 50%, 0 100%); }
   .bow::after { right: 0; clip-path: polygon(100% 0, 0 50%, 100% 100%); }
 
-  /* ---------- timeline ---------- */
-  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
-  .timeline::before {
-    content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px;
-    background: repeating-linear-gradient(to bottom, var(--pink) 0 6px, transparent 6px 12px);
-  }
-  .timeline li { position: relative; padding: 0 0 26px 38px; }
-  .timeline li::before {
-    content: ""; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 50%;
-    background: var(--lime); border: 3px solid var(--navy);
-  }
-  .timeline li.next::before { background: var(--surface); border-color: var(--pink); }
-  .timeline time { font-family: var(--hand); font-size: 24px; color: var(--pink); line-height: 1.2; display: block; }
-  .timeline h3 { font-size: 18px; margin: 2px 0 4px; font-weight: 400; }
-  .timeline p { color: var(--ink-soft); font-size: 15.5px; margin: 0; }
-
-  /* ---------- subtitles ---------- */
-  .subs { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; align-items: start; }
-  @media (max-width: 760px) { .subs { grid-template-columns: 1fr; } }
-  .credit {
-    background: var(--board); color: var(--lavender);
-    border-radius: 14px; padding: 26px 26px 24px; position: relative;
-  }
-  .credit .label { font-family: var(--hand); color: var(--lime); font-size: 24px; line-height: 1.2; }
-  .credit .handle {
-    font-family: var(--display); font-style: italic; font-weight: 900;
-    font-size: clamp(24px, 3.4vw, 32px); color: var(--pink-hi); word-break: break-all; line-height: 1.3; margin: 6px 0 14px;
-  }
-  .credit p { color: var(--lavender); font-size: 15.5px; }
-  .tape {
-    position: absolute; top: -12px; left: 50%; width: 90px; height: 24px; transform: translateX(-50%) rotate(-3deg);
-    background: rgba(212,245,60,.75);
-  }
-  .btn {
-    display: inline-block; text-decoration: none; font-size: 15px;
-    background: var(--pink); color: #fff; padding: 9px 18px; border-radius: 999px;
-    box-shadow: 3px 3px 0 var(--navy);
-  }
-  .btn:hover { background: var(--pink-hi); }
-  .chip {
-    display: inline-block; font-size: 13px; padding: 2px 10px; border-radius: 6px;
-    background: var(--chip-bg); color: var(--chip-ink); margin-right: 6px;
-  }
-
   /* ---------- footer ---------- */
   footer {
     background: var(--board-deep); color: var(--lavender);
@@ -354,21 +210,6 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .logo { animation: none; background-position: 0 0, 0 0, 0 0, 0 0, 30% 0; }
-  }
-  /* ===== 밝은 테마 + 포스터 로고 스타일 (맨 끝에 두면 위 설정을 덮어씀) ===== */
-  :root, :root:not([data-theme="light"]) {
-    --board: #2B8BB8;
-    --board-deep: #1A5E82;
-    --lime: #E4F03E;
-    --page: #F2EEEA;
-    --surface: #FFFFFF;
-    --ink: #24315F;
-    --ink-soft: #5E6688;
-    --rule: #DED6CE;
-    --ruled-line: #ECE6E0;
-    --lavender: #F0ECF7;
-    color-scheme: light;
   }
   .hero {
     background:
@@ -380,7 +221,7 @@
   }
   .hero-inner { text-align: center; }
   .logo {
-    display: inline-block;
+    display: inline-block; margin: 0; color: var(--pink);
     font-family: "Great Vibes", "Snell Roundhand", cursive; font-style: normal; font-weight: 400;
     font-size: clamp(96px, 19vw, 230px); line-height: 1.05; letter-spacing: 0;
     padding: 0 .12em;
@@ -392,7 +233,6 @@
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px rgba(255, 90, 180, .55);
-    animation: none;
     filter: drop-shadow(0 3px 0 rgba(10, 50, 80, .35));
   }
   .thai-title {
@@ -406,28 +246,10 @@
   .thai-title small { font-family: "Charmonman", var(--thai); font-size: .6em; margin-left: 6px; }
   /* ===== 공식 계정 + 앨범 ===== */
   .official { margin-top: 22px; }
-  .album-page {
-    position: relative; margin-top: 8px;
-    background-color: var(--surface);
-    background-image: radial-gradient(var(--rule) 1.2px, transparent 1.3px);
-    background-size: 22px 22px;
-    border-radius: 6px 18px 18px 6px;
-    border-left: 14px solid var(--ink);
-    box-shadow: 6px 6px 0 var(--board);
-    padding: 44px clamp(18px, 4vw, 44px) 40px;
-  }
-  .album-page::before {
-    content: ""; position: absolute; left: -10px; top: 24px; bottom: 24px; width: 6px;
-    background: radial-gradient(circle, var(--page) 3px, transparent 3.5px) 0 0 / 6px 46px repeat-y;
-  }
   .album-label {
     position: absolute; top: -14px; left: 30px; transform: rotate(-3deg);
     background: var(--lime); color: var(--ink); font-weight: 800; font-size: 14px;
     padding: 4px 16px; box-shadow: 2px 2px 0 rgba(36,49,95,.18);
-  }
-  .album-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 34px 26px; list-style: none; margin: 0; padding: 0;
   }
   .snap {
     position: relative; margin: 0; background: #fff; padding: 10px 10px 14px;
@@ -450,7 +272,6 @@
   .snap-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .snap-photo .empty { font-size: 13px; color: var(--ink-soft); }
   .snap figcaption { font-size: 14px; line-height: 1.5; color: var(--ink); margin-top: 10px; text-align: center; }
-  .snap figcaption a { color: var(--pink); font-weight: 700; text-decoration: none; margin-left: 4px; }
   .viewer {
     border: 0; padding: 14px 14px 18px; background: #fff; max-width: min(92vw, 560px);
     box-shadow: 0 20px 60px rgba(0,0,0,.35);
@@ -458,7 +279,6 @@
   .viewer::backdrop { background: rgba(26, 94, 130, .6); }
   .viewer img { display: block; max-width: 100%; max-height: 74vh; margin: 0 auto; }
   .viewer p { text-align: center; margin: 12px auto 0; font-size: 15px; }
-  .viewer p a { color: var(--pink); font-weight: 700; margin-left: 6px; }
   .viewer-close {
     position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border-radius: 50%;
     border: 0; background: var(--ink); color: #fff; font-size: 20px; cursor: pointer; line-height: 1;
@@ -555,8 +375,6 @@
     .idcard .photo[data-member] { transition: none; }
   }
   /* ===== 앨범을 책처럼 ===== */
-  #album .album-page { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; }
-  #album .album-page::before { display: none; }
   .book { position: relative; max-width: 980px; margin: 8px auto 0; perspective: 2200px; }
 
   .book-cover {
@@ -954,6 +772,90 @@
   .cal-ev.extra.fan { background: #EEE6FB; color: #5B3FA0; box-shadow: inset 0 0 0 1.5px #9B7FD6; border: 1.5px dashed #9B7FD6; }
   .cal-legend .k.fan { background: #EEE6FB; border: 1.5px dashed #9B7FD6; }
   .notice-imgs.grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); margin-top: 10px; }
+  /* ===== 휴대폰 화면 ===== */
+  @media (max-width: 640px) {
+    html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 100px); }
+    body { font-size: 16px; line-height: 1.75; }
+    .bar { flex-wrap: wrap; row-gap: 4px; padding: 8px 14px 6px; }
+    .bar nav {
+      order: 3; width: calc(100% + 28px); margin: 0 -14px; padding: 0 8px;
+      -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+              mask-image: linear-gradient(90deg, #000 85%, transparent);
+    }
+    .bar nav a { font-size: 14px; padding: 6px 9px; }
+    .hero { padding: 34px 10px 44px; }
+    main { padding: 0 16px 56px; }
+    section { padding-top: 52px; }
+    h2 { font-size: 28px; }
+    .note-hand { font-size: 14.5px; margin-bottom: 18px; }
+
+    .posters {
+      display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none;
+    }
+    .posters::-webkit-scrollbar { display: none; }
+    .poster, .poster:nth-child(even) { flex: 0 0 100%; padding: 4px 12px 12px 6px; transform: none; scroll-snap-align: center; }
+    .posters-wrap { max-width: 340px; margin: 0 auto; }
+    .poster-dots { display: flex; }
+    .poster-cap { text-align: center; margin-top: 6px; }
+    .poster-cap .swipe { display: inline; }
+    .logo { font-size: clamp(72px, 22vw, 96px); }
+    .thai-title { font-size: 24px; margin-top: -28px; transform: translateX(28%) rotate(-11deg); }
+    .synopsis { margin-top: 22px; }
+    .pilot { grid-template-columns: 128px 1fr; }
+    .pilot .play { width: 36px; height: 26px; }
+    .vid { display: grid; grid-template-columns: 136px 1fr; align-items: center; }
+    .vid-thumb { height: 100%; aspect-ratio: auto; min-height: 84px; }
+    .vid-body { padding: 8px 12px; }
+    .vid-tag { font-size: 11px; padding: 1px 8px; }
+    .vid-date { font-size: 12px; }
+    .vid-title { font-size: 14px; line-height: 1.4; margin-top: 4px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .cal-day.today::after { display: none; }
+    .cal-ev.extra, .cal-ev.bday { font-size: 0; height: 7px; padding: 0; margin-top: 3px; border-radius: 4px; }
+    .cal-ev.extra.fan { border-width: 1px; }
+    .paper { padding: 14px 16px; background-image: none; line-height: 1.6; }
+    .facts { grid-template-columns: 1fr; }
+    .facts dt { font-size: 12.5px; margin-top: 10px; }
+    .facts dt:first-child { margin-top: 0; }
+    .facts dd { font-size: 15px; }
+    .pilot { padding: 12px; gap: 10px; }
+    .pilot strong { font-size: 16px; }
+    .shop-btn { font-size: 14px; padding: 8px 14px; }
+
+    .cast { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .idcard header { font-size: 11px; padding: 6px 10px; }
+    .idcard .body { padding: 10px 10px 12px; }
+    .bow { top: 34px; right: 8px; transform: scale(.8); }
+    .photo { font-size: 40px; margin-bottom: 8px; }
+    .idcard h3 { font-size: 18px; }
+    .idcard .ko-name, .idcard .actor { font-size: 12.5px; }
+    .idcard .actor strong { font-size: 14px; }
+    .ig { font-size: 12px; gap: 4px; max-width: 100%; overflow-wrap: anywhere; }
+
+    .vid-grid { gap: 16px; }
+    .onair { padding: 16px; }
+    .cal { padding: 12px 10px 16px; }
+
+    .shelf-row { padding: 0 8px; gap: 4px; min-height: 190px; }
+    .spine { width: calc(var(--w) * .8); height: calc(var(--h) * .82); font-size: 12px; }
+    .bookend { width: 18px; height: 96px; }
+    .shelf-plant { font-size: 34px; }
+
+    .leaf { padding: 24px 12px 30px; }
+    .leaf-grid { gap: 22px 12px; }
+    .snap { padding: 6px 6px 10px; }
+    .snap::before { width: 54px; height: 18px; top: -9px; }
+    .snap figcaption { font-size: 12px; margin-top: 6px; }
+
+    .notice-body, .shelf-in { padding: 18px 16px 22px; }
+    .notice-body h3 { font-size: 20px; }
+    .notice-body table { display: block; overflow-x: auto; font-size: 13px; }
+    .profile-in { padding: 16px; gap: 16px; }
+    .profile-main { max-width: 230px; margin: 0 auto; }
+    .profile-thumbs { justify-content: center; }
+    .profile h3 { font-size: 26px; }
+    footer { padding: 32px 16px calc(32px + env(safe-area-inset-bottom, 0px)); }
+  }
 </style>
 </head>
 <body>
@@ -988,25 +890,17 @@
     <h2><span lang="ko">작품 소개</span><span lang="en">About the series</span></h2>
     <p class="note-hand"><span lang="ko">한 장으로 보는 기본 정보</span><span lang="en">The basics, on one page</span></p>
     <div class="about-grid">
-    <figure class="poster">
-      <img src="poster.jpg" width="900" height="1125" alt="Oxytoxin official poster: five students in school uniforms and sunglasses in a classroom, with the title in glittering pink">
-      <figcaption><span lang="ko">공식 포스터 © GMMTV</span><span lang="en">Official poster © GMMTV</span></figcaption>
-    </figure>
-    <div>
-   <div class="about-grid">
-   <figure class="poster-2">
-      <img src="poster-2.jpg" width="900" height="1125" alt="Oxytoxin official poster-2: five students in school uniforms and sunglasses in a classroom, with the title in glittering pink">
-    </figure>
-    <div>
-   <div class="about-grid">
-   <figure class="poster-3">
-      <img src="poster-3.jpg" width="900" height="1125" alt="Oxytoxin official poster-3: five students in school uniforms and sunglasses in a classroom, with the title in glittering pink">
-    </figure>
-    <div>
-    <div>
-    <div>
-  </section>
-    <div class="paper">
+      <div class="posters-wrap">
+        <div class="posters" tabindex="0" aria-label="공식 포스터 / Official posters">
+          <figure class="poster"><img src="poster.jpg" width="900" height="1125" alt="Oxytoxin 공식 포스터 1"></figure>
+          <figure class="poster"><img src="poster-2.jpg" width="900" height="1125" alt="Oxytoxin 공식 포스터 2" loading="lazy"></figure>
+          <figure class="poster"><img src="poster-3.jpg" width="900" height="1125" alt="Oxytoxin 공식 포스터 3" loading="lazy"></figure>
+        </div>
+        <div class="poster-dots"><button type="button" class="on" aria-label="포스터 1 / Poster 1"></button><button type="button" aria-label="포스터 2 / Poster 2"></button><button type="button" aria-label="포스터 3 / Poster 3"></button></div>
+        <p class="poster-cap"><span lang="ko">공식 포스터 © GMMTV<span class="swipe"> · 옆으로 넘겨 보기</span></span><span lang="en">Official posters © GMMTV<span class="swipe"> · swipe for more</span></span></p>
+      </div>
+      <div>
+        <div class="paper">
       <dl class="facts">
         <dt><span lang="ko">원제</span><span lang="en">Original title</span></dt>
         <dd>Oxytoxin <span class="th" lang="th">จุนใจไอดาว</span></dd>
@@ -1021,17 +915,11 @@
         <dt><span lang="ko">공식 해시태그</span><span lang="en">Hashtag</span></dt>
         <dd>#OxytoxinSeries</dd>
       </dl>
-    </div>
-    <p class="synopsis">
-      <span lang="ko">학교에서 가장 예쁘고, 가장 부유하고, 가장 짓궂은 언니들 무리 'TOXXXXIN'. 그녀들이 괴롭힘을 당하던 고2 후배 '준짜이'와 우연히 마주치면서, 특별한 감정과 운명의 실이 서로를 하나로 엮기 시작한다.
-
-그렇게 화려한 메이크오버 작전이 시작되고, 그녀들은 뒤틀리고 들끓지만 아름답게 자라나 빛을 발하는 자기 자신을 발견해 간다.</span>
-      <span lang="en">When TOXXXXIN, the prettiest, richest and most wicked gang of senior girls at school, cross paths by chance with Junjai, a bullied Grade 11 junior, a special feeling and the threads of fate begin to string them together.
-
-And so begins a glamorous makeover mission, as they each discover a self that is twisted and restless… yet grows beautifully and begins to shine.</span>
-    </p>
-    </div> 
-    </div>
+        </div>
+        <p class="synopsis">
+          <span lang="ko">학교에서 가장 예쁘고, 가장 부유하고, 가장 짓궂은 언니들 무리 'TOXXXXIN'. 그녀들이 괴롭힘을 당하던 고2 후배 '준짜이'와 우연히 마주치면서, 특별한 감정과 운명의 실이 서로를 하나로 엮기 시작한다.<br><br>그렇게 화려한 메이크오버 작전이 시작되고, 그녀들은 뒤틀리고 들끓지만 아름답게 자라나 빛을 발하는 자기 자신을 발견해 간다.</span>
+          <span lang="en">When TOXXXXIN, the prettiest, richest and most wicked gang of senior girls at school, cross paths by chance with Junjai, a bullied Grade 11 junior, a special feeling and the threads of fate begin to string them together.<br><br>And so begins a glamorous makeover mission, as they each discover a self that is twisted and restless… yet grows beautifully and begins to shine.</span>
+        </p>
     <a class="pilot trailer" href="https://youtu.be/whry_7Bh1a8" target="_blank" rel="noopener">
       <div class="thumb">
         <img src="https://i.ytimg.com/vi/whry_7Bh1a8/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
@@ -1066,9 +954,10 @@ And so begins a glamorous makeover mission, as they each discover a self that is
         <a class="shop-btn alt" href="https://shop.gmm-tv.com/product/oxytoxin-novel-thai-version-th" target="_blank" rel="noopener"><span lang="ko">소설책 · GMMTV SHOP</span><span lang="en">Paperback · GMMTV SHOP</span></a>
       </div>
     </div>
-    </div>
+      </div>
     </div>
   </section>
+
   <section id="schedule">
     <h2><span lang="ko">방송 일정</span><span lang="en">Schedule</span></h2>
     <p class="note-hand"><span lang="ko">매주 토요일 · GMM25 / 넷플릭스 전 세계 동시 공개</span><span lang="en">Every Saturday · GMM25 / worldwide on Netflix</span></p>
@@ -1082,17 +971,6 @@ And so begins a glamorous makeover mission, as they each discover a self that is
       <article class="idcard">
         <header><span>Toxxxxin</span><b>No.1</b></header><span class="bow" aria-hidden="true"></span>
         <div class="body">
-          <div class="photo"><span aria-hidden="true">J</span><img src="cast/waifha.jpg" alt="Waifha" loading="lazy" onerror="this.remove()"></div>
-          <h3>Junjai</h3>
-          <div class="ko-name" lang="ko">준짜이</div>
-          <div class="actor"><strong>Waifha</strong>Chanitsiri Ratananimit
-            <a class="ig" href="https://www.instagram.com/waifhaa/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@waifhaa</a> 
-	    <a class="ig" href="https://x.com/waifha_" target="_blank" rel="noopener">𝕏 @waifha_</a> </div>
-        </div>
-      </article>
-      <article class="idcard">
-        <header><span>Toxxxxin</span><b>No.2</b></header><span class="bow" aria-hidden="true"></span>
-        <div class="body">
           <div class="photo"><span aria-hidden="true">A</span><img src="cast/tonkhaw.jpg" alt="Tonkhaw" loading="lazy" onerror="this.remove()"></div>
           <h3>Aidao</h3>
           <div class="ko-name" lang="ko">아이다오</div>
@@ -1101,7 +979,7 @@ And so begins a glamorous makeover mission, as they each discover a self that is
         </div>
       </article>
       <article class="idcard">
-        <header><span>Toxxxxin</span><b>No.3</b></header><span class="bow" aria-hidden="true"></span>
+        <header><span>Toxxxxin</span><b>No.2</b></header><span class="bow" aria-hidden="true"></span>
         <div class="body">
           <div class="photo"><span aria-hidden="true">G</span><img src="cast/benz.jpg" alt="Benz" loading="lazy" onerror="this.remove()"></div>
           <h3>Gale</h3>
@@ -1111,7 +989,7 @@ And so begins a glamorous makeover mission, as they each discover a self that is
         </div>
       </article>
       <article class="idcard">
-        <header><span>Toxxxxin</span><b>No.4</b></header><span class="bow" aria-hidden="true"></span>
+        <header><span>Toxxxxin</span><b>No.3</b></header><span class="bow" aria-hidden="true"></span>
         <div class="body">
           <div class="photo"><span aria-hidden="true">C</span><img src="cast/yoghurt.jpg" alt="Yoghurt" loading="lazy" onerror="this.remove()"></div>
           <h3>Chelsea</h3>
@@ -1121,7 +999,7 @@ And so begins a glamorous makeover mission, as they each discover a self that is
         </div>
       </article>
       <article class="idcard">
-        <header><span>Toxxxxin</span><b>No.5</b></header><span class="bow" aria-hidden="true"></span>
+        <header><span>Toxxxxin</span><b>No.4</b></header><span class="bow" aria-hidden="true"></span>
         <div class="body">
           <div class="photo"><span aria-hidden="true">M</span><img src="cast/pang.jpg" alt="Pang" loading="lazy" onerror="this.remove()"></div>
           <h3>Meimei</h3>
@@ -1130,9 +1008,21 @@ And so begins a glamorous makeover mission, as they each discover a self that is
             <a class="ig" href="https://www.instagram.com/sabsima.p/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@sabsima.p</a><a class="ig" href="https://x.com/PSabsima" target="_blank" rel="noopener">𝕏 @PSabsima</a></div>
         </div>
       </article>
+      <article class="idcard">
+        <header><span>Toxxxxin</span><b>No.5</b></header><span class="bow" aria-hidden="true"></span>
+        <div class="body">
+          <div class="photo"><span aria-hidden="true">J</span><img src="cast/waifha.jpg" alt="Waifha" loading="lazy" onerror="this.remove()"></div>
+          <h3>Junjai</h3>
+          <div class="ko-name" lang="ko">준짜이</div>
+          <div class="actor"><strong>Waifha</strong>Chanitsiri Ratananimit
+            <a class="ig" href="https://www.instagram.com/waifhaa/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@waifhaa</a> 
+	    <a class="ig" href="https://x.com/waifha_" target="_blank" rel="noopener">𝕏 @waifha_</a> </div>
+        </div>
+      </article>
     </div>
-  <section> 
+  </section>
 
+  <section id="videos">
     <h2><span lang="ko">영상 아카이브</span><span lang="en">Video archive</span></h2>
     <p class="note-hand"><span lang="ko">비하인드, 인터뷰 등 드라마 밖 공식 콘텐츠 모음</span><span lang="en">Official behind-the-scenes, interviews and more</span></p>
     <ul class="vid-grid">
@@ -1827,7 +1717,7 @@ REACT TRAILER “Oxytoxin จุนใจไอดาว” 🕶️📹 | แก
   /* ===== 멤버 프로필: 정보는 여기서만 고치면 돼요 ===== */
   var PROFILES = {
     waifha: {
-      no: 'No.1', nick: 'Waifha', full: 'Chanitsiri Ratananimit', thai: '',
+      no: 'No.5', nick: 'Waifha', full: 'Chanitsiri Ratananimit', thai: '',
       role: { ko: '준짜이 역', en: 'as Junjai' },
       birth: '2000-07-04',/* 예: '2005-03-14' 형식으로. 나이는 자동 계산 */
       facts: [                /* [한국어 항목, 영어 항목, 내용] — 줄을 복사해서 늘리면 돼요 */
@@ -1839,7 +1729,7 @@ REACT TRAILER “Oxytoxin จุนใจไอดาว” 🕶️📹 | แก
       ig: 'waifhaa', x: 'waifha_'
     },
     tonkhaw: {
-      no: 'No.2', nick: 'Tonkhaw', full: 'Nonthakarn Kaewobchoey', thai: '',
+      no: 'No.1', nick: 'Tonkhaw', full: 'Nonthakarn Kaewobchoey', thai: '',
       role: { ko: '아이다오 역', en: 'as Aidao' },
       birth: '2000-11-23',
       facts: [ ['키', 'Height', ''], ['학교', 'School', ''] ],
@@ -1848,7 +1738,7 @@ REACT TRAILER “Oxytoxin จุนใจไอดาว” 🕶️📹 | แก
       ig: 'tonnkhaw', x: 't0nnkhaw'
     },
     benz: {
-      no: 'No.3', nick: 'Benz', full: 'Jittanan Sirisamlid', thai: '',
+      no: 'No.2', nick: 'Benz', full: 'Jittanan Sirisamlid', thai: '',
       role: { ko: '게일 역', en: 'as Gale' },
       birth: '2004-12-17',
       facts: [ ['키', 'Height', ''], ['학교', 'School', ''] ],
@@ -1857,7 +1747,7 @@ REACT TRAILER “Oxytoxin จุนใจไอดาว” 🕶️📹 | แก
       ig: 'nbenztuk', x: 'kunbentsu'
     },
     yoghurt: {
-      no: 'No.4', nick: 'Yoghurt', full: 'Yosita Wasuphiruk', thai: '',
+      no: 'No.3', nick: 'Yoghurt', full: 'Yosita Wasuphiruk', thai: '',
       role: { ko: '첼시 역', en: 'as Chelsea' },
       birth: '2003-07-30',
       facts: [ ['키', 'Height', ''], ['학교', 'School', ''] ],
@@ -1866,7 +1756,7 @@ REACT TRAILER “Oxytoxin จุนใจไอดาว” 🕶️📹 | แก
       ig: 'yoghurtyy', x: 'ygyoghurtyy'
     },
     pang: {
-      no: 'No.5', nick: 'Pang', full: 'Sabsima Payakharn', thai: '',
+      no: 'No.4', nick: 'Pang', full: 'Sabsima Payakharn', thai: '',
       role: { ko: '메이메이 역', en: 'as Meimei' },
       birth: '2004-02-09',
       facts: [ ['키', 'Height', ''], ['학교', 'School', ''] ],
@@ -2473,6 +2363,20 @@ REACT TRAILER “Oxytoxin จุนใจไอดาว” 🕶️📹 | แก
     });
     dlg.querySelector('.shelf-close').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+  /* ===== 포스터 넘기기 ===== */
+  (function () {
+    var box = document.querySelector('.posters'); if (!box) return;
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.poster-dots button'));
+    function mark() {
+      var i = Math.round(box.scrollLeft / box.clientWidth);
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+    }
+    box.addEventListener('scroll', mark, { passive: true });
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { box.scrollTo({ left: k * box.clientWidth }); }); });
+    box.querySelectorAll('img').forEach(function (im, k) {
+      im.addEventListener('error', function () { im.closest('figure').remove(); if (dots[k]) dots[k].style.display = 'none'; });
+    });
   })();
 </script>
 <script data-goatcounter="https://mewyj.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
